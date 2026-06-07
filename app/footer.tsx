@@ -18,6 +18,7 @@ export function Footer() {
         })
           .format(new Date())
           .toLowerCase()
+          .replace(" ", "")
       );
     update();
     const interval = setInterval(update, 1000);
