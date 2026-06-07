@@ -470,6 +470,30 @@ figure[data-rehype-pretty-code-figure] pre code > [data-line]::before {
   margin: 0.625rem auto;
 }
 
+.article .img-figure {
+  display: block;
+  margin: 0.625rem auto;
+}
+
+.article .img-figure img {
+  margin: 0;
+}
+
+.article figure:not([data-rehype-pretty-code-figure]) {
+  display: block;
+  margin: 2rem auto;
+}
+
+.article figcaption,
+.article .caption {
+  display: block;
+  color: #7c7b74;
+  font-size: 0.75rem;
+  font-weight: 460;
+  text-align: center;
+  padding-top: 0.625rem;
+}
+
 .article hr {
   height: 1px;
   background: var(--color-hairline);

@@ -51,17 +51,17 @@ Everything below is styled out of the box — plain markdown or plain HTML, no i
 | Sections | `##` headings get hairline leaders and populate the article’s index tree; `###` for subsections |
 | Links | `[text](url)` — internal paths use the router, external URLs open in a new tab |
 | Inline code | `` `code` `` with a quiet background tint |
-| Code blocks | Fenced with a language tag for Shiki highlighting and line numbers |
+| Code blocks | Fenced with a language tag for Shiki highlighting and line numbers; add `title="file.ts"` after the language for a filename label, `caption="…"` for a caption below |
 | Blockquotes | `> quote` — italic with a hairline bar on the left |
 | Lists | `-` and `1.` with hanging markers in the margin |
-| Images | `![alt](src)` — rounded corners, lazy-loaded |
+| Images | `![alt](src)` — rounded corners, lazy-loaded; `![alt](src "Caption")` adds a centered caption |
 | Dividers | `---` renders as a hairline |
 | Footnotes | `[^1]` in text, `[^1]: note` anywhere below — collected at the bottom under a short rule, click to return |
 | Highlights | `<mark>text</mark>` for the yellow marker; `<mark data-marker="blue">text</mark>` for the blue selection pill |
 | Definition lists | `<dl><dt>term</dt><dd>description</dd></dl>` — leader lines connect terms to right-aligned descriptions |
 | Prompt boxes | `<aside className="prompt">…</aside>` — dashed rounded box in serif italic, for quoting prompts |
 | Acknowledgements | A `<footer>` at the end of the post with `# Acknowledgements` and paragraphs — small gray type |
-| Interactive demos | Import any client component and place it inline |
+| Interactive demos | Import any client component and place it inline; wrap in `<figure>` with a `<figcaption>` for a caption |
 
 ## Running
 

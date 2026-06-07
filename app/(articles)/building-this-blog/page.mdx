@@ -24,7 +24,7 @@ This site is the marriage of the two: <mark data-marker="blue">Benji’s aesthet
 
 Each post lives at `app/(articles)/<slug>/page.mdx` and ships at the root path — this one is just `/building-this-blog`. The homepage index is driven by a hand-maintained registry:
 
-```ts
+```ts title="app/get-posts.ts"
 export function getPosts(): Post[] {
   return [...postsData.posts].sort((a, b) => b.date.localeCompare(a.date));
 }
@@ -36,7 +36,10 @@ Code blocks are highlighted at build time with [rehype-pretty-code](https://rehy
 
 Because posts are real React routes, they can import client components inline. Here’s one, animated with Framer Motion:
 
-<Counter />
+<figure>
+  <Counter />
+  <figcaption>A Framer Motion counter, imported two lines above this sentence.</figcaption>
+</figure>
 
 That’s the part I care about most.[^1] A post about a gesture can contain the gesture. A post about an animation can play it.
 

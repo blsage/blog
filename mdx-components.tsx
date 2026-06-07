@@ -27,8 +27,20 @@ function CustomLink({
   );
 }
 
-function CustomImage(props: React.ImgHTMLAttributes<HTMLImageElement>) {
-  return <img loading="lazy" decoding="async" {...props} />;
+function CustomImage({
+  title,
+  alt,
+  ...props
+}: React.ImgHTMLAttributes<HTMLImageElement>) {
+  if (title) {
+    return (
+      <span className="img-figure">
+        <img loading="lazy" decoding="async" alt={alt} {...props} />
+        <span className="caption">{title}</span>
+      </span>
+    );
+  }
+  return <img loading="lazy" decoding="async" alt={alt} {...props} />;
 }
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
