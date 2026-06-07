@@ -1,0 +1,39 @@
+.figure {
+  margin: 2rem auto;
+}
+
+.frame {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  padding: 3rem 1.5rem;
+  border: 1px solid var(--color-hairline);
+  border-radius: 0.75rem;
+  background: #fff;
+}
+
+.rate {
+  appearance: none;
+  position: absolute;
+  top: 1rem;
+  right: 1.25rem;
+  background: none;
+  cursor: pointer;
+  color: var(--color-secondary);
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 460;
+  letter-spacing: -0.00563rem;
+  font-variant-numeric: tabular-nums;
+  transition: color 0.15s ease;
+}
+
+.rate:hover {
+  color: var(--color-text);
+}
+
+.video {
+  max-width: 100%;
+  max-height: 38rem;
+  border-radius: 0.5rem;
+}
