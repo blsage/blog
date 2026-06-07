@@ -28,7 +28,7 @@ export function MarginNote({
       brackets: ["right"],
       color: "#1a1a1a",
       strokeWidth: 1,
-      padding: [6, 16, 6, 0],
+      padding: [4, 7, 4, 0],
       iterations: 1,
       animationDuration: 700,
     });

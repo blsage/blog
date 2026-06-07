@@ -7,7 +7,7 @@
   position: absolute;
   top: 50%;
   left: 100%;
-  transform: translateX(3.5rem) translateY(-50%) rotate(-2.5deg);
+  transform: translateX(2.75rem) translateY(-50%) rotate(-2.5deg);
   width: 100%;
   max-width: 16rem;
   text-align: left;
