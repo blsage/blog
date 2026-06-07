@@ -41,6 +41,14 @@ export function ArticleAside() {
     return () => window.removeEventListener("scroll", onScroll);
   }, [pathname]);
 
+  const flashHeading = (id: string) => {
+    const heading = document.getElementById(id);
+    if (!heading) return;
+    heading.classList.remove("target");
+    void heading.offsetWidth;
+    heading.classList.add("target");
+  };
+
   return (
     <aside className={styles.aside}>
       <Link href="/" className={styles.backButton}>
@@ -72,7 +80,12 @@ export function ArticleAside() {
           <ul>
             {headings.map((heading) => (
               <li key={heading.id} data-active={activeId === heading.id}>
-                <a href={`#${heading.id}`}>{heading.text}</a>
+                <a
+                  href={`#${heading.id}`}
+                  onClick={() => flashHeading(heading.id)}
+                >
+                  {heading.text}
+                </a>
               </li>
             ))}
           </ul>

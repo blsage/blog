@@ -608,6 +608,32 @@ figure[data-rehype-pretty-code-figure] pre code > [data-line]::before {
   text-indent: -9999px;
 }
 
+@keyframes fadeInOut {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  8%,
+  45% {
+    opacity: 1;
+  }
+}
+
+.article .target {
+  position: relative;
+}
+
+.article .target::before {
+  content: "";
+  position: absolute;
+  inset: -0.5rem -1rem -0.5rem;
+  border-radius: 0.5rem;
+  background: #ffa;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  animation: fadeInOut 5s ease both;
+}
+
 @keyframes staggerIn {
   0% {
     opacity: 0;
