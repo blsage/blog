@@ -24,6 +24,12 @@ export function PostList({ posts }: { posts: Post[] }) {
                 .filter((post) => post.date.startsWith(year))
                 .map((post) => {
                   const [y, m, d] = post.date.split("-");
+                  const month = new Date(
+                    `${post.date}T00:00:00Z`
+                  ).toLocaleDateString("en-US", {
+                    month: "short",
+                    timeZone: "UTC",
+                  });
                   return (
                     <li key={post.id}>
                       <Link href={`/${post.id}`}>
@@ -34,8 +40,8 @@ export function PostList({ posts }: { posts: Post[] }) {
                           )}
                         </h2>
                         <time dateTime={post.date}>
-                          <span>{`${m}/${d}`}</span>
-                          <span>/</span>
+                          <span>{`${month} ${Number(d)}`}</span>
+                          <span>,</span>
                           <span>{y}</span>
                         </time>
                       </Link>
