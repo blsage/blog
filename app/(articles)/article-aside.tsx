@@ -44,9 +44,16 @@ export function ArticleAside() {
   const flashHeading = (id: string) => {
     const heading = document.getElementById(id);
     if (!heading) return;
-    heading.classList.remove("target");
-    void heading.offsetWidth;
-    heading.classList.add("target");
+    let text = heading.querySelector<HTMLSpanElement>(":scope > [data-flash]");
+    if (!text) {
+      text = document.createElement("span");
+      text.dataset.flash = "";
+      while (heading.firstChild) text.appendChild(heading.firstChild);
+      heading.appendChild(text);
+    }
+    text.classList.remove("target");
+    void text.offsetWidth;
+    text.classList.add("target");
   };
 
   return (

@@ -340,11 +340,15 @@ a {
   border-radius: 1rem;
 }
 
+.article .prompt[data-label] {
+  padding-top: 2.75rem;
+}
+
 .article .prompt[data-label]::after {
   content: attr(data-label);
   position: absolute;
-  top: -0.8125rem;
-  right: 1.25rem;
+  top: 1rem;
+  right: 1rem;
   padding: 0.2rem 0.55rem;
   background: #faefbe;
   color: #57521f;
