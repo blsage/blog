@@ -1,0 +1,349 @@
+:root {
+  --color-text: #111;
+  --color-secondary: rgba(0, 0, 0, 0.4);
+  --color-soft: rgba(0, 0, 0, 0.5);
+  --color-hairline: #f2f2f2;
+  --color-hairline-strong: #ededed;
+  --color-underline: #d9d9d9;
+  --color-underline-hover: #666;
+  --color-code-bg: #f8f8f8;
+  --column-width: 36.375rem;
+  --font-code: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas,
+    monospace;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+html {
+  background: #fff;
+  color: var(--color-text);
+  scroll-behavior: smooth;
+  scroll-padding-top: 5.25rem;
+}
+
+body {
+  font-family: var(--font-primary), -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  font-size: 16px;
+  overflow-y: scroll;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.top-fade {
+  pointer-events: none;
+  z-index: 9;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 8rem;
+  background: linear-gradient(
+    180deg,
+    #fff 0,
+    hsla(0, 0%, 100%, 0.738) 19%,
+    hsla(0, 0%, 100%, 0.541) 34%,
+    hsla(0, 0%, 100%, 0.382) 47%,
+    hsla(0, 0%, 100%, 0.278) 56.5%,
+    hsla(0, 0%, 100%, 0.194) 65%,
+    hsla(0, 0%, 100%, 0.126) 73%,
+    hsla(0, 0%, 100%, 0.075) 80.2%,
+    hsla(0, 0%, 100%, 0.042) 86.1%,
+    hsla(0, 0%, 100%, 0.021) 91%,
+    hsla(0, 0%, 100%, 0.008) 95.2%,
+    hsla(0, 0%, 100%, 0.002) 98.2%,
+    hsla(0, 0%, 100%, 0)
+  );
+}
+
+.container {
+  max-width: var(--column-width);
+  margin: 0 auto;
+  padding: 5rem 1rem 2.5rem;
+}
+
+@media screen and (max-width: 768px) {
+  .top-fade {
+    height: 2.5rem;
+  }
+
+  .container {
+    padding: 2rem 1.5rem 2.5rem;
+  }
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.article {
+  max-width: 70ch;
+}
+
+.article > header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0 0 0.5rem;
+}
+
+.article > header h1 {
+  color: var(--color-text);
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.25rem;
+  letter-spacing: -0.00563rem;
+}
+
+.article > header time {
+  color: var(--color-secondary);
+  font-size: 0.875rem;
+  font-weight: 460;
+  line-height: 1.25rem;
+  letter-spacing: -0.00563rem;
+}
+
+.article h1 {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: -0.00813rem;
+}
+
+.article h2 {
+  font-size: 0.875rem;
+  font-weight: 560;
+  line-height: 1.25rem;
+  letter-spacing: -0.00563rem;
+}
+
+.article h1,
+.article h2,
+.article h3,
+.article h4 {
+  text-wrap: balance;
+}
+
+.article > p,
+.article > p + h1 {
+  padding-top: 1rem;
+}
+
+.article > p + h2 {
+  padding-top: 2.25rem;
+}
+
+.article p,
+.article li {
+  font-size: 0.875rem;
+  font-weight: 460;
+  line-height: 1.25rem;
+  letter-spacing: -0.00563rem;
+}
+
+.article p strong,
+.article li strong {
+  font-weight: 600;
+}
+
+.article em {
+  color: #000;
+  font-family: var(--font-secondary), Georgia, serif;
+  font-size: 0.9375rem;
+  font-style: italic;
+  font-weight: 430;
+  letter-spacing: 0.01rem;
+}
+
+.article p a {
+  position: relative;
+  display: inline;
+  transition: all 0.2s ease;
+}
+
+.article p a::before {
+  pointer-events: none;
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  border-radius: 2px;
+  background: var(--color-underline);
+  transition: inherit;
+}
+
+.article p a:hover::before {
+  background: var(--color-underline-hover);
+}
+
+.article blockquote {
+  font-size: 0.8125rem;
+  font-style: italic;
+  font-weight: 460;
+  line-height: 140%;
+  letter-spacing: -0.0025rem;
+  padding: 2rem 0;
+  color: hsla(0, 0%, 7%, 0.6);
+}
+
+.article blockquote p {
+  display: block;
+  position: relative;
+  padding: 0 0 0 1rem;
+}
+
+.article blockquote p::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 0.125rem;
+  border-radius: 0.3125rem;
+  background: #e6e6e6;
+}
+
+.article > ul,
+.article > ol {
+  list-style: none;
+  display: block;
+  position: relative;
+  padding: 0.5rem 0 1rem 1.25rem;
+}
+
+.article > ul li,
+.article > ol li {
+  position: relative;
+  padding: 0 0 0.5rem 0.75rem;
+}
+
+.article > ul li:last-child,
+.article > ol li:last-child {
+  padding-bottom: 0;
+}
+
+.article > ul li::before {
+  content: "";
+  position: absolute;
+  right: 100%;
+  top: 0.675em;
+  width: 0.25rem;
+  height: 0.25rem;
+  border-radius: 50%;
+  background: #b3b3b3;
+}
+
+.article > ol {
+  counter-reset: list;
+  padding-left: 1rem;
+}
+
+.article > ol li {
+  padding-left: 1rem;
+  counter-increment: list;
+}
+
+.article > ol li::before {
+  content: counter(list) ".";
+  position: absolute;
+  right: 100%;
+  top: 0;
+  color: var(--color-secondary);
+}
+
+.article :not(pre) > code {
+  font-family: var(--font-code);
+  font-size: 0.8125rem;
+  background: var(--color-code-bg);
+  padding: 0.1em 0.3em;
+  border-radius: 0.25rem;
+}
+
+figure[data-rehype-pretty-code-figure] {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 0.625rem auto;
+}
+
+figure[data-rehype-pretty-code-figure] [data-rehype-pretty-code-title] {
+  font-family: var(--font-code);
+  font-size: 0.75rem;
+  color: #7c7b74;
+}
+
+figure[data-rehype-pretty-code-figure]
+  figcaption[data-rehype-pretty-code-caption] {
+  color: #7c7b74;
+  font-size: 0.75rem;
+  text-align: center;
+}
+
+figure[data-rehype-pretty-code-figure] pre {
+  display: block;
+  overflow-x: hidden;
+  white-space: pre-wrap;
+  word-break: break-word;
+  border-radius: 0.5rem;
+  background: var(--color-code-bg);
+  color: #333;
+}
+
+figure[data-rehype-pretty-code-figure] pre [data-line] {
+  display: block;
+  padding-left: 1.75rem;
+}
+
+figure[data-rehype-pretty-code-figure] pre code {
+  display: block;
+  font-family: var(--font-code);
+  font-size: 0.8125rem;
+  font-weight: 400;
+  line-height: 1.55;
+  padding: 0.875rem 1rem;
+  counter-reset: line;
+}
+
+figure[data-rehype-pretty-code-figure] pre code span {
+  display: inline;
+}
+
+figure[data-rehype-pretty-code-figure] pre code > [data-line]::before {
+  counter-increment: line;
+  content: counter(line);
+  display: inline-block;
+  width: 1.25rem;
+  margin-right: 0.5rem;
+  margin-left: -1.75rem;
+  text-align: left;
+  color: hsla(0, 0%, 7%, 0.4);
+  font-size: 0.8125rem;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.article img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  margin: 0.625rem auto;
+}
+
+.article hr {
+  height: 1px;
+  background: var(--color-hairline);
+  margin: 2rem 0;
+}

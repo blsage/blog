@@ -1,0 +1,23 @@
+import { Counter } from "./counter";
+
+export const metadata = {
+  title: "Building this blog",
+  description:
+    "How this site works: every post is an MDX file that is its own route.",
+};
+
+This site is a small Next.js app where every post is an MDX file that *is* its own route. There’s no CMS and no database — publishing means adding a folder with a `page.mdx` inside and one line to a JSON registry.
+
+That registry drives the homepage index:
+
+```ts
+export function getPosts(): Post[] {
+  return [...postsData.posts].sort((a, b) => b.date.localeCompare(a.date));
+}
+```
+
+Because posts are real React routes, they can import client components inline. Here’s one, animated with Framer Motion:
+
+<Counter />
+
+The whole thing is a reusable template — swap one config file, rewrite the bio, and it’s yours.

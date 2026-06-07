@@ -1,0 +1,118 @@
+.postList {
+  padding: 3rem 0 0;
+}
+
+.title {
+  color: var(--color-secondary);
+  font-size: 0.875rem;
+  font-weight: 460;
+  letter-spacing: -0.00563rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--color-hairline);
+}
+
+.postList > ul {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+}
+
+.postList > ul > li {
+  border-bottom: 1px solid var(--color-hairline);
+}
+
+.postList > ul > li:last-child {
+  border-bottom: none;
+}
+
+.postList > ul > li > ul {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+}
+
+.postList > ul > li > ul > li > a {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.735rem 0 0.735rem 6.75rem;
+}
+
+@media screen and (max-width: 520px) {
+  .postList > ul > li > ul > li > a {
+    padding-left: 3rem;
+  }
+}
+
+.postList > ul > li > ul > li > a::after {
+  content: "";
+  border-bottom: 1px solid var(--color-hairline);
+  position: absolute;
+  bottom: 0;
+  left: 6.75rem;
+  right: 0;
+}
+
+.postList > ul > li > ul > li:last-child > a::after {
+  display: none;
+}
+
+.postList > ul > li > ul > li > a h2 {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  color: var(--color-text);
+  font-size: 0.875rem;
+  font-weight: 460;
+  letter-spacing: -0.00563rem;
+  transition: opacity 0.14s ease;
+}
+
+.postList > ul > li > ul > li > a time {
+  color: var(--color-secondary);
+  font-size: 0.875rem;
+  font-weight: 460;
+  line-height: normal;
+  letter-spacing: -0.00563rem;
+}
+
+.postList > ul > li > ul > li > a time span {
+  display: inline-block;
+  transition: opacity 0.14s ease;
+}
+
+.postList > ul > li > ul > li > a time span:nth-child(2) {
+  position: absolute;
+  width: 0;
+  height: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.postList > ul > li > ul > li > a time span:last-child {
+  visibility: hidden;
+  position: absolute;
+  left: 0;
+}
+
+.postList > ul > li > ul > li:first-child > a time span:last-child {
+  visibility: visible;
+}
+
+@media screen and (min-width: 520px) {
+  .postList > ul:hover > li > ul > li > a h2,
+  .postList > ul:hover > li > ul > li > a time span {
+    opacity: 0.3;
+  }
+
+  .postList > ul:hover > li > ul > li > a time span:last-child {
+    opacity: 1;
+  }
+
+  .postList > ul > li > ul > li > a:hover h2,
+  .postList > ul > li > ul > li > a:hover time span {
+    opacity: 1;
+  }
+}
