@@ -42,7 +42,18 @@ That’s the part I care about most.[^1] A post about a gesture can contain the 
 
 ## Make it yours
 
-The whole thing is a reusable template: [taylor-made](https://github.com/blsage/taylor-made). Swap `site.config.ts`, rewrite `app/bio.mdx`, add posts to the registry, and it’s yours.
+The whole thing is a reusable template: [taylor-made](https://github.com/blsage/taylor-made). Everything personal lives in three files:
+
+<dl>
+  <dt>site.config.ts</dt>
+  <dd>Name, location, metadata</dd>
+  <dt>app/bio.mdx</dt>
+  <dd>The homepage bio</dd>
+  <dt>app/posts.json</dt>
+  <dd>The post registry</dd>
+</dl>
+
+Swap those, add posts, and it’s yours.
 
 [^1]: The counter above is an ordinary client component co-located in this post’s folder — no plugin system, no shortcodes.
 

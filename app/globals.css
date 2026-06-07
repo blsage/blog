@@ -1,4 +1,5 @@
 :root {
+  --color-bg: #fdfdfc;
   --color-text: #111;
   --color-secondary: rgba(0, 0, 0, 0.4);
   --color-soft: rgba(0, 0, 0, 0.5);
@@ -22,7 +23,7 @@
 }
 
 html {
-  background: #fdfdfc;
+  background: var(--color-bg);
   color: var(--color-text);
   scroll-behavior: smooth;
   scroll-padding-top: 5.25rem;
@@ -280,6 +281,50 @@ a {
   right: 100%;
   top: 0;
   color: var(--color-secondary);
+}
+
+.article dl {
+  position: relative;
+  width: fit-content;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem 0.25rem;
+  padding: 1rem 0;
+}
+
+.article dl dt {
+  color: var(--color-text);
+  font-size: 0.875rem;
+  font-weight: 460;
+  line-height: 1.25rem;
+  letter-spacing: -0.00563rem;
+  width: fit-content;
+  background-color: var(--color-bg);
+  padding-right: 0.5rem;
+}
+
+.article dl dt::before {
+  z-index: -1;
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  transform: translateY(1.25em);
+  border-bottom: 1px solid var(--color-hairline);
+}
+
+.article dl dd {
+  margin-left: auto;
+  padding-left: 0.5rem;
+  background-color: var(--color-bg);
+  text-align: right;
+  width: fit-content;
+  color: var(--color-secondary);
+  font-size: 0.875rem;
+  font-weight: 460;
+  line-height: 1.25rem;
+  letter-spacing: -0.00563rem;
+  white-space: nowrap;
 }
 
 .article :not(pre) > code {
