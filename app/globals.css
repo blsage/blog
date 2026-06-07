@@ -342,42 +342,42 @@ a {
 .article .prompt {
   position: relative;
   margin: 2rem 0;
-  padding: 1.25rem 1.75rem;
-  border: 1px dashed #d9d9d9;
+  padding: 1rem 1.25rem;
   border-radius: 1rem;
+  background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='16' ry='16' stroke='%23ccc' stroke-width='2' stroke-dasharray='8%2c 6' stroke-linecap='round'/%3e%3c/svg%3e");
 }
 
 .article .prompt[data-label] {
-  padding-top: 2.75rem;
+  padding-top: 2.5rem;
 }
 
 .article .prompt[data-label]::after {
   content: attr(data-label);
   position: absolute;
-  top: 1rem;
+  top: 1.1rem;
   right: 1rem;
-  padding: 0.22em 0.6em 0.16em 0.48em;
+  padding: 0.15em 0.35em;
   background: transparent;
   background-image: linear-gradient(
-    91.4deg,
-    color-mix(in srgb, rgb(255, 220, 0), transparent 52%),
-    color-mix(in srgb, rgb(255, 220, 0), transparent 88%) 4%,
-    color-mix(in srgb, rgb(255, 220, 0), transparent 70%) 96%,
-    color-mix(in srgb, rgb(255, 220, 0), transparent 38%)
+    75deg,
+    color-mix(in srgb, #ffdc00, transparent 40%),
+    color-mix(in srgb, #ffdc00, transparent 85%) 4%,
+    color-mix(in srgb, #ffdc00, transparent 60%) 96%,
+    color-mix(in srgb, #ffdc00, transparent 20%)
   );
-  color: rgba(0, 0, 0, 0.72);
+  color: rgba(0, 0, 0, 0.5);
   font-family: var(--font-primary), sans-serif;
   font-style: normal;
-  font-size: 0.8125rem;
-  font-weight: 460;
-  letter-spacing: -0.0025rem;
-  line-height: 1.25rem;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: normal;
+  line-height: 1.3;
   border-radius: 0.5em 0.3em;
 }
 
 .article .prompt,
 .article .prompt p {
-  color: hsla(0, 0%, 7%, 0.65);
+  color: #666;
   font-family: var(--font-secondary), Georgia, serif;
   font-style: italic;
   font-weight: 430;
