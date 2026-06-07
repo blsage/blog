@@ -34,7 +34,7 @@ export function PostList({ posts }: { posts: Post[] }) {
                           )}
                         </h2>
                         <time dateTime={post.date}>
-                          <span>{`${d}/${m}`}</span>
+                          <span>{`${m}/${d}`}</span>
                           <span>/</span>
                           <span>{y}</span>
                         </time>

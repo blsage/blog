@@ -24,11 +24,10 @@ export function formatShortDate(date: string): string {
 }
 
 export function formatArticleDate(date: string): string {
-  const d = toUTCDate(date);
-  const day = d.getUTCDate();
-  const month = d.toLocaleDateString("en-US", {
+  return toUTCDate(date).toLocaleDateString("en-US", {
     month: "long",
+    day: "numeric",
+    year: "numeric",
     timeZone: "UTC",
   });
-  return `${day} ${month}, ${d.getUTCFullYear()}`;
 }
