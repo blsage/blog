@@ -1,6 +1,8 @@
-# blog
+# taylor-made
 
 A minimal personal blog where every post is an MDX file that is its own route. No CMS, no database, no frontmatter parsing.
+
+The name credits [Benji Taylor](https://benji.org) — the design is closely modeled on his site, and the MDX-as-routes architecture follows [rauchg/blog](https://github.com/rauchg/blog).
 
 Built with Next.js (App Router), TypeScript, `@next/mdx`, rehype-pretty-code (Shiki), CSS Modules + plain CSS, and Framer Motion.
 
