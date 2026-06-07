@@ -283,6 +283,33 @@ a {
   color: var(--color-secondary);
 }
 
+.article .prompt {
+  margin: 2rem 0;
+  padding: 1.25rem 1.75rem;
+  border: 1px dashed #d9d9d9;
+  border-radius: 1rem;
+}
+
+.article .prompt,
+.article .prompt p {
+  color: hsla(0, 0%, 7%, 0.65);
+  font-family: var(--font-secondary), Georgia, serif;
+  font-style: italic;
+  font-weight: 430;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  letter-spacing: 0.01rem;
+}
+
+.article .prompt p {
+  margin: 0;
+  padding: 0;
+}
+
+.article .prompt p + p {
+  padding-top: 0.75rem;
+}
+
 .article mark {
   color: inherit;
   background: none;
