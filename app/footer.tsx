@@ -23,7 +23,7 @@ function clockIn(timeZone: string): Clock {
   return {
     hour: Number(partOf("hour")),
     minute: Number(partOf("minute")),
-    meridiem: partOf("dayPeriod").toLowerCase(),
+    meridiem: partOf("dayPeriod"),
   };
 }
 
@@ -52,6 +52,7 @@ export function Footer() {
                   value={clock.minute}
                   format={{ minimumIntegerDigits: 2 }}
                 />
+                {" "}
                 {clock.meridiem} in {site.location.city},{" "}
                 {site.location.region}
               </>
