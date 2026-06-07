@@ -56,7 +56,7 @@ Everything below is styled out of the box — plain markdown or plain HTML, no i
 | Lists | `-` and `1.` with hanging markers in the margin |
 | Images | `![alt](src)` — rounded corners, lazy-loaded; `![alt](src "Caption")` adds a centered caption |
 | Dividers | `---` renders as a hairline |
-| Footnotes | `[^1]` in text, `[^1]: note` anywhere below — collected at the bottom under a short rule, click to return |
+| Footnotes | `[^1]` in text, `[^1]: note` anywhere below — collected at the bottom under a short rule, click to return; external links inside get a box-arrow icon |
 | Highlights | `<mark>text</mark>` for the yellow marker; `<mark data-marker="blue">text</mark>` for the blue selection pill |
 | Definition lists | `<dl><dt>term</dt><dd>description</dd></dl>` — leader lines connect terms to right-aligned descriptions |
 | Prompt boxes | `<aside className="prompt">…</aside>` — dashed rounded box in serif italic, for quoting prompts; add `data-label="Prompt Example"` for a yellow corner tag |

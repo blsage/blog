@@ -612,6 +612,35 @@ figure[data-rehype-pretty-code-figure] pre code > [data-line]::before {
   position: relative;
 }
 
+.footnotes a[target="_blank"] {
+  color: rgba(0, 0, 0, 0.65);
+  font-weight: 500;
+  white-space: nowrap;
+  transition: color 0.15s ease;
+}
+
+.footnotes a[target="_blank"]:hover {
+  color: #111;
+}
+
+.footnotes a[target="_blank"]::before {
+  display: none;
+}
+
+.footnotes a[target="_blank"]::after {
+  content: "";
+  display: inline-block;
+  width: 0.95em;
+  height: 0.95em;
+  margin-left: 0.3em;
+  vertical-align: -0.125em;
+  background-color: rgba(0, 0, 0, 0.4);
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14 4h6v6M20 4l-9 9M10 5H7a3 3 0 0 0-3 3v9a3 3 0 0 0 3 3h9a3 3 0 0 0 3-3v-3'/%3E%3C/svg%3E")
+    no-repeat center / contain;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14 4h6v6M20 4l-9 9M10 5H7a3 3 0 0 0-3 3v9a3 3 0 0 0 3 3h9a3 3 0 0 0 3-3v-3'/%3E%3C/svg%3E")
+    no-repeat center / contain;
+}
+
 .footnotes .data-footnote-backref::before {
   display: none;
 }
