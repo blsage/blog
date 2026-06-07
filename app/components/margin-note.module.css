@@ -1,0 +1,38 @@
+.wrapper {
+  position: relative;
+  padding-top: 1rem;
+}
+
+.note {
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  transform: translateX(3.5rem) translateY(-50%);
+  width: 100%;
+  max-width: 16rem;
+  text-align: left;
+  text-wrap: balance;
+  font-family: var(--font-cursive), cursive;
+  color: #4a4a4a;
+  font-size: 1.375rem;
+  font-weight: 460;
+  line-height: 95%;
+  letter-spacing: -0.0025rem;
+  opacity: 0;
+  transition: opacity 0.5s ease 0.45s;
+}
+
+.visible {
+  opacity: 1;
+}
+
+@media screen and (max-width: 1080px) {
+  .note {
+    position: static;
+    display: block;
+    transform: none;
+    margin: 0 auto;
+    padding-top: 1rem;
+    text-align: center;
+  }
+}
