@@ -38,8 +38,16 @@ Because posts are real React routes, they can import client components inline. H
 
 <Counter />
 
-That’s the part I care about most. A post about a gesture can contain the gesture. A post about an animation can play it.
+That’s the part I care about most.[^1] A post about a gesture can contain the gesture. A post about an animation can play it.
 
 ## Make it yours
 
 The whole thing is a reusable template: [taylor-made](https://github.com/blsage/taylor-made). Swap `site.config.ts`, rewrite `app/bio.mdx`, add posts to the registry, and it’s yours.
+
+[^1]: The counter above is an ordinary client component co-located in this post’s folder — no plugin system, no shortcodes.
+
+<footer>
+# Acknowledgements
+
+The design of this site is closely modeled on [Benji Taylor’s](https://benji.org), and the architecture on [Guillermo Rauch’s blog](https://github.com/rauchg/blog). Thanks to both for working in the open.
+</footer>

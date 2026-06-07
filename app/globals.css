@@ -126,10 +126,24 @@ a {
 }
 
 .article h2 {
+  display: flex;
+  align-items: center;
   font-size: 0.875rem;
   font-weight: 560;
   line-height: 1.25rem;
   letter-spacing: -0.00563rem;
+}
+
+.article h2::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  margin-left: 0.75rem;
+  background: linear-gradient(
+    to right,
+    var(--color-hairline),
+    rgba(242, 242, 242, 0)
+  );
 }
 
 .article h1,
@@ -359,6 +373,110 @@ figure[data-rehype-pretty-code-figure] pre code > [data-line]::before {
   height: 1px;
   background: var(--color-hairline);
   margin: 2rem 0;
+}
+
+.article sup {
+  display: inline-block;
+  padding: 0 0 0 0.35em;
+  color: hsla(0, 0%, 7%, 0.5);
+  font-size: 0.6em;
+  font-weight: 460;
+  line-height: 1;
+}
+
+.article sup a:hover {
+  color: #000;
+}
+
+.article > footer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 3rem 0 0;
+}
+
+.article > footer h1,
+.article > footer h2,
+.article > footer p {
+  color: var(--color-secondary);
+  font-size: 0.75rem;
+  font-weight: 460;
+  letter-spacing: 0.00063rem;
+  line-height: 1.2;
+}
+
+.article > footer h2::after {
+  display: none;
+}
+
+.footnotes {
+  padding: 2.5rem 0 0;
+}
+
+.footnotes::before {
+  content: "";
+  display: block;
+  width: 3.125rem;
+  height: 1px;
+  background: var(--color-hairline-strong);
+}
+
+.footnotes > h2 {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+
+.footnotes ol {
+  list-style: none;
+  display: block;
+  position: relative;
+  counter-reset: footnote;
+  padding: 3rem 0 0 0.25rem;
+}
+
+.footnotes ol li {
+  position: relative;
+  counter-increment: footnote;
+  color: var(--color-secondary);
+  font-size: 0.75rem;
+  font-weight: 460;
+  letter-spacing: 0.00063rem;
+  line-height: 1.2;
+  padding: 0 0 0.5625rem 0.25rem;
+}
+
+.footnotes ol li::before {
+  content: counter(footnote);
+  position: absolute;
+  right: 100%;
+  top: 0;
+  font-size: 0.45rem;
+  font-weight: 460;
+}
+
+.footnotes ol li p {
+  font-size: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+}
+
+.footnotes ol li p a {
+  z-index: 2;
+  position: relative;
+}
+
+.footnotes .data-footnote-backref {
+  z-index: 1;
+  position: absolute;
+  inset: 0;
+  bottom: 0.5em;
+  overflow: hidden;
+  display: inline-block;
+  text-indent: -9999px;
 }
 
 @keyframes staggerIn {
