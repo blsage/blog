@@ -55,7 +55,8 @@ Everything below is styled out of the box — plain markdown or plain HTML, no i
 | Blockquotes | `> quote` — italic with a hairline bar on the left |
 | Lists | `-` and `1.` with hanging markers in the margin |
 | Images | `![alt](src)` — rounded corners, lazy-loaded; `![alt](src "Caption")` adds a centered caption |
-| Dividers | `---` renders as a hairline |
+| Dividers | `---` renders as a hairline; `<hr data-variant="dots" />` for three centered dots, `data-variant="dashed"` for a dashed line |
+| Pull quotes | `<div className="notation"><p>Quote.</p><span className="note">margin note</span></div>` — centered gray statement with a handwritten note in the right margin (stacks below on small screens) |
 | Footnotes | `[^1]` in text, `[^1]: note` anywhere below — collected at the bottom under a short rule, click to return; external links inside get a box-arrow icon |
 | Highlights | `<mark>text</mark>` for the yellow marker; `<mark data-marker="blue">text</mark>` for the blue selection pill |
 | Capsules | `<kbd>Continue</kbd>` — a rounded outline around inline words, for UI button labels |
