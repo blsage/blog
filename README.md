@@ -58,7 +58,7 @@ Everything below is styled out of the box — plain markdown or plain HTML, no i
 | Dividers | `---` renders as a hairline; `<hr data-variant="dots" />` for three centered dots, `data-variant="dashed"` for a dashed line |
 | Pull quotes | `<div className="notation"><p>Quote.</p><span className="note">margin note</span></div>` — centered gray statement with a handwritten note in the right margin (stacks below on small screens) |
 | Footnotes | `[^1]` in text, `[^1]: note` anywhere below — collected at the bottom under a short rule, click to return; external links inside get a box-arrow icon |
-| Highlights | `<mark>text</mark>` for the yellow marker; `<mark data-marker="blue">text</mark>` for the blue selection pill |
+| Highlights | `<mark>text</mark>` for the flat yellow marker; `<Highlight>text</Highlight>` (from `@/app/components/highlight`) for realistic ink strokes — angled gradient, uneven edges, denser ink at the ends; `color` accepts `blue`/`pink`/`yellow`/`green` or any CSS color |
 | Capsules | `<kbd>Continue</kbd>` — a rounded outline around inline words, for UI button labels |
 | Definition lists | `<dl><dt>term</dt><dd>description</dd></dl>` — leader lines connect terms to right-aligned descriptions |
 | CTA cards | `<a className="cta" href="…">Primary text. <span>Secondary action.</span></a>` — full-width gray card with an ↗ arrow, for end-of-post calls to action |
