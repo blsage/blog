@@ -32,15 +32,14 @@ function CustomImage({
   alt,
   ...props
 }: React.ImgHTMLAttributes<HTMLImageElement>) {
-  if (title) {
-    return (
-      <span className="img-figure">
+  return (
+    <span className="img-figure">
+      <span className="img-frame">
         <img loading="lazy" decoding="async" alt={alt} {...props} />
-        <span className="caption">{title}</span>
       </span>
-    );
-  }
-  return <img loading="lazy" decoding="async" alt={alt} {...props} />;
+      {title && <span className="caption">{title}</span>}
+    </span>
+  );
 }
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
