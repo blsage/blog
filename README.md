@@ -60,6 +60,7 @@ Everything below is styled out of the box — plain markdown or plain HTML, no i
 | Highlights | `<mark>text</mark>` for the yellow marker; `<mark data-marker="blue">text</mark>` for the blue selection pill |
 | Capsules | `<kbd>Continue</kbd>` — a rounded outline around inline words, for UI button labels |
 | Definition lists | `<dl><dt>term</dt><dd>description</dd></dl>` — leader lines connect terms to right-aligned descriptions |
+| CTA cards | `<a className="cta" href="…">Primary text. <span>Secondary action.</span></a>` — full-width gray card with an ↗ arrow, for end-of-post calls to action |
 | Prompt boxes | `<aside className="prompt">…</aside>` — dashed rounded box in serif italic, for quoting prompts; add `data-label="Prompt Example"` for a yellow corner tag |
 | Acknowledgements | A `<footer>` at the end of the post with `# Acknowledgements` and paragraphs — small gray type |
 | Videos | `import { Video } from "@/app/components/video"` then `<Video src="/demo.mp4" caption="…" />` — framed card, loops muted, 1x/0.5x speed toggle in the top right |
