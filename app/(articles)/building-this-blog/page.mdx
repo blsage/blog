@@ -40,6 +40,19 @@ Because posts are real React routes, they can import client components inline. H
 
 That’s the part I care about most.[^1] A post about a gesture can contain the gesture. A post about an animation can play it.
 
+## The elements
+
+Everything a post might need is styled and ready, in plain markdown or plain HTML. *Emphasis* sets in Newsreader italic, **strong** stays Inter, and inline `code` gets a quiet tint. Text can be <mark>marked</mark> like a highlighter or <mark data-marker="blue">highlighted</mark> like a selection.
+
+> Blockquotes speak in an italic voice, with a hairline bar to the left.
+
+- Unordered lists hang small dot bullets in the margin
+- Ordered lists do the same with their numbers
+
+Section headings get hairline leaders and feed the index tree on the left. Footnotes[^2] collect at the bottom under a short rule. Definition lists draw leader lines between terms and descriptions — there’s one in the next section. Images come rounded, dividers are hairlines, and an acknowledgements `footer` closes a post in small gray type, like the one below.
+
+[^2]: Like this one. Click it to jump back.
+
 ## Make it yours
 
 The whole thing is a reusable template: [taylor-made](https://github.com/blsage/taylor-made). Everything personal lives in three files:

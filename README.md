@@ -41,6 +41,27 @@ import { Demo } from "./demo";
 
 Co-locate the component (and its CSS module) in the post’s folder. See `app/(articles)/building-this-blog/` for a working example with a highlighted code block and a Framer Motion component.
 
+## Writing elements
+
+Everything below is styled out of the box — plain markdown or plain HTML, no imports needed. `building-this-blog` demonstrates all of them live.
+
+| Element | How |
+| --- | --- |
+| Emphasis / strong | `*emphasis*` sets in Newsreader italic; `**strong**` stays Inter |
+| Sections | `##` headings get hairline leaders and populate the article’s index tree; `###` for subsections |
+| Links | `[text](url)` — internal paths use the router, external URLs open in a new tab |
+| Inline code | `` `code` `` with a quiet background tint |
+| Code blocks | Fenced with a language tag for Shiki highlighting and line numbers |
+| Blockquotes | `> quote` — italic with a hairline bar on the left |
+| Lists | `-` and `1.` with hanging markers in the margin |
+| Images | `![alt](src)` — rounded corners, lazy-loaded |
+| Dividers | `---` renders as a hairline |
+| Footnotes | `[^1]` in text, `[^1]: note` anywhere below — collected at the bottom under a short rule, click to return |
+| Highlights | `<mark>text</mark>` for the yellow marker; `<mark data-marker="blue">text</mark>` for the blue selection pill |
+| Definition lists | `<dl><dt>term</dt><dd>description</dd></dl>` — leader lines connect terms to right-aligned descriptions |
+| Acknowledgements | A `<footer>` at the end of the post with `# Acknowledgements` and paragraphs — small gray type |
+| Interactive demos | Import any client component and place it inline |
+
 ## Running
 
 ```bash
