@@ -469,6 +469,10 @@ figure[data-rehype-pretty-code-figure] pre code > [data-line]::before {
   position: relative;
 }
 
+.footnotes .data-footnote-backref::before {
+  display: none;
+}
+
 .footnotes .data-footnote-backref {
   z-index: 1;
   position: absolute;
