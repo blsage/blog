@@ -57,6 +57,7 @@ Everything below is styled out of the box — plain markdown or plain HTML, no i
 | Images | `![alt](src)` — rounded corners, lazy-loaded; `![alt](src "Caption")` adds a centered caption |
 | Dividers | `---` renders as a hairline; `<hr data-variant="dots" />` for three centered dots, `data-variant="dashed"` for a dashed line |
 | Pull quotes | `<div className="notation"><p>Quote.</p><span className="note">margin note</span></div>` — centered gray statement with a handwritten note in the right margin (stacks below on small screens) |
+| Margin notes | Same `notation` wrapper with `data-plain data-bracket` — the paragraph keeps its normal styling and gets a hand-drawn bracket plus the handwritten note in the right margin |
 | Footnotes | `[^1]` in text, `[^1]: note` anywhere below — collected at the bottom under a short rule, click to return; external links inside get a box-arrow icon |
 | Highlights | `<mark>text</mark>` for the flat yellow marker; `<Highlight>text</Highlight>` (from `@/app/components/highlight`) for realistic ink strokes — angled gradient, uneven edges, denser ink at the ends; `color` accepts `blue`/`pink`/`yellow`/`green` or any CSS color |
 | Capsules | `<kbd>Continue</kbd>` — a rounded outline around inline words, for UI button labels |
