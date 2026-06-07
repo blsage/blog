@@ -3,12 +3,26 @@ import { Counter } from "./counter";
 export const metadata = {
   title: "Building this blog",
   description:
-    "How this site works: every post is an MDX file that is its own route.",
+    "Why I built my own blog, where the idea came from, and how it works.",
 };
 
-This site is a small Next.js app where every post is an MDX file that *is* its own route. There’s no CMS and no database — publishing means adding a folder with a `page.mdx` inside and one line to a JSON registry.
+I’ve wanted a place to write for a while. Not a Substack, not a Medium account — a small corner of the internet that I actually own, where a post can be anything a web page can be.
 
-That registry drives the homepage index:
+The bar for shipping it was low on purpose: if publishing a post takes more than writing markdown and pushing to git, I’ll never do it. So the whole system had to disappear behind the writing.
+
+## Where the idea came from
+
+Two sites shaped this one.
+
+The look comes from [Benji Taylor’s site](https://benji.org). His pages are quiet in a way most personal sites aren’t — one narrow column, small type, dates tucked into the margins, and interactive demos that sit inline with the prose like they were always part of the paragraph. The first time I read one of his posts I scrolled back up just to look at it again.
+
+The architecture comes from [Guillermo Rauch’s blog](https://github.com/rauchg/blog). His insight is that a blog doesn’t need a content layer at all: every post is just an MDX file that *is* its own route, plus one line in a JSON registry that drives the index. No CMS, no database, no frontmatter parser — the framework already knows how to render pages, so let posts be pages.
+
+This site is the marriage of the two: Benji’s aesthetic on Guillermo’s skeleton.
+
+## How it works
+
+Each post lives at `app/(articles)/<slug>/page.mdx` and ships at the root path — this one is just `/building-this-blog`. The homepage index is driven by a hand-maintained registry:
 
 ```ts
 export function getPosts(): Post[] {
@@ -16,8 +30,16 @@ export function getPosts(): Post[] {
 }
 ```
 
+Code blocks are highlighted at build time with [rehype-pretty-code](https://rehype-pretty.pages.dev), and the shared article layout reads the title and date for the current slug from the registry, so posts never repeat their own metadata. Everything prerenders to static HTML.
+
+## Interactive posts
+
 Because posts are real React routes, they can import client components inline. Here’s one, animated with Framer Motion:
 
 <Counter />
 
-The whole thing is a reusable template — swap one config file, rewrite the bio, and it’s yours.
+That’s the part I care about most. A post about a gesture can contain the gesture. A post about an animation can play it.
+
+## Make it yours
+
+The whole thing is a reusable template: [taylor-made](https://github.com/blsage/taylor-made). Swap `site.config.ts`, rewrite `app/bio.mdx`, add posts to the registry, and it’s yours.

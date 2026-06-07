@@ -70,6 +70,19 @@
   transition: opacity 0.14s ease;
 }
 
+.postList > ul > li > ul > li > a h2::after {
+  content: "→";
+  color: var(--color-secondary);
+  font-size: 0.75rem;
+  opacity: 0;
+  transition: opacity 0.14s ease, transform 0.14s ease;
+}
+
+.postList > ul > li > ul > li > a:hover h2::after {
+  opacity: 1;
+  transform: translateX(0.25rem) rotate(-45deg);
+}
+
 .postList > ul > li > ul > li > a time {
   color: var(--color-secondary);
   font-size: 0.875rem;

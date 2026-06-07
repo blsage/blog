@@ -1,0 +1,100 @@
+.aside {
+  position: fixed;
+  top: 5rem;
+  left: 5rem;
+}
+
+.backButton {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0;
+  color: var(--color-secondary);
+  font-size: 0.875rem;
+  font-weight: 460;
+  line-height: 1.25rem;
+  letter-spacing: -0.00563rem;
+  transition: color 0.1s ease;
+}
+
+.backButton:hover {
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.tree {
+  padding: 1.875rem 0 0;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.tree[data-ready="true"] {
+  opacity: 1;
+}
+
+.tree nav {
+  max-width: 10rem;
+}
+
+.tree nav h2 {
+  cursor: pointer;
+  color: hsla(0, 0%, 7%, 0.4);
+  font-size: 0.8125rem;
+  font-weight: 460;
+  line-height: 1.2;
+  letter-spacing: -0.0025rem;
+  padding: 0 0 1rem;
+  opacity: 0;
+  transition: 0.4s ease;
+  transition-property: color, opacity;
+}
+
+.tree nav h2:hover {
+  color: hsla(0, 0%, 7%, 0.8);
+}
+
+.tree nav h2[data-active="true"] {
+  color: var(--color-text);
+}
+
+.tree nav[data-scrolled="true"] h2 {
+  opacity: 1;
+}
+
+.tree nav ul {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  list-style: none;
+}
+
+.tree nav ul li {
+  position: relative;
+  display: block;
+}
+
+.tree nav ul li a {
+  display: block;
+  color: hsla(0, 0%, 7%, 0.4);
+  font-size: 0.8125rem;
+  font-weight: 460;
+  line-height: 1.2;
+  letter-spacing: -0.0025rem;
+  transition: color 0.1s ease;
+}
+
+.tree nav ul li a:hover,
+.tree nav ul li[data-active="true"] a {
+  color: hsla(0, 0%, 7%, 0.8);
+}
+
+@media (max-width: 1080px) {
+  .aside {
+    position: static;
+    padding: 0 0 2rem;
+  }
+
+  .tree {
+    display: none;
+  }
+}

@@ -6,7 +6,7 @@ import { getPosts, formatShortDate } from "./get-posts";
 
 export default function Home() {
   return (
-    <div>
+    <div className="homepage">
       <article className="article">
         <header>
           <h1>{site.name}</h1>
