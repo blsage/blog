@@ -140,11 +140,7 @@ a {
   flex: 1;
   height: 1px;
   margin-left: 0.75rem;
-  background: linear-gradient(
-    to right,
-    var(--color-hairline),
-    rgba(242, 242, 242, 0)
-  );
+  background: var(--color-hairline);
 }
 
 .article h1,
