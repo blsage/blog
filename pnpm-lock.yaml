@@ -17,6 +17,9 @@ importers:
       '@next/mdx':
         specifier: ^16.2.7
         version: 16.2.7(@mdx-js/loader@3.1.1)(@mdx-js/react@3.1.1(@types/react@19.2.17)(react@19.2.7))
+      '@number-flow/react':
+        specifier: ^0.6.0
+        version: 0.6.0(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       framer-motion:
         specifier: ^12.40.0
         version: 12.40.0(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
@@ -282,6 +285,12 @@ packages:
     cpu: [x64]
     os: [win32]
 
+  '@number-flow/react@0.6.0':
+    resolution: {integrity: sha512-77Yfc9+zkV2UDSP8phhZzxJGuwxi/Tt1TikmipL+1r3e9GFKEYDZ1XwInj67NoSt3OnOB0KLvvcl3lfPZgBHVQ==}
+    peerDependencies:
+      react: ^18 || ^19
+      react-dom: ^18 || ^19
+
   '@shikijs/core@4.2.0':
     resolution: {integrity: sha512-Hc87Ab1Ld/vEbZRCbwx344I5v+4RU8CVToUTRkqXL1+TjbuOp9U5Xa0M23V4GEWHxVn+yO5otb+HkQVm3ptWQQ==}
     engines: {node: '>=20'}
@@ -445,6 +454,9 @@ packages:
   escape-string-regexp@5.0.0:
     resolution: {integrity: sha512-/veY75JbMK4j1yjvuUxuVsiS/hr/4iHs9FTT6cgTexxdE0Ly/glccBAkloH/DofkjRbZU3bnoj38mOmhkZ0lHw==}
     engines: {node: '>=12'}
+
+  esm-env@1.2.2:
+    resolution: {integrity: sha512-Epxrv+Nr/CaL4ZcFGPJIYLWFom+YeV1DqMLHJoEd9SYRxNbaFruBwfEX/kkHUJf55j2+TUbmDcmuilbP1TmXHA==}
 
   estree-util-attach-comments@3.0.0:
     resolution: {integrity: sha512-cKUwm/HUcTDsYh/9FgnuFqpfquUbwIqwKM26BVCGDPVgvaCl/nDCCjUfiLlx6lsEZ3Z4RFxNbOQ60pkaEwFxGw==}
@@ -736,6 +748,9 @@ packages:
         optional: true
       sass:
         optional: true
+
+  number-flow@0.6.0:
+    resolution: {integrity: sha512-K8flNq2Wqus53vjp/btVo3qXFkagF8dIdYavreBfE7hlvFFG/b1HMGEH6nZL+mlrJ+4lbLP9OmPv3t2rmRkpSQ==}
 
   oniguruma-parser@0.12.2:
     resolution: {integrity: sha512-6HVa5oIrgMC6aA6WF6XyyqbhRPJrKR02L20+2+zpDtO5QAzGHAUGw5TKQvwi5vctNnRHkJYmjAhRVQF2EKdTQw==}
@@ -1109,6 +1124,13 @@ snapshots:
   '@next/swc-win32-x64-msvc@16.2.7':
     optional: true
 
+  '@number-flow/react@0.6.0(react-dom@19.2.7(react@19.2.7))(react@19.2.7)':
+    dependencies:
+      esm-env: 1.2.2
+      number-flow: 0.6.0
+      react: 19.2.7
+      react-dom: 19.2.7(react@19.2.7)
+
   '@shikijs/core@4.2.0':
     dependencies:
       '@shikijs/primitive': 4.2.0
@@ -1259,6 +1281,8 @@ snapshots:
       vfile-message: 4.0.3
 
   escape-string-regexp@5.0.0: {}
+
+  esm-env@1.2.2: {}
 
   estree-util-attach-comments@3.0.0:
     dependencies:
@@ -1888,6 +1912,10 @@ snapshots:
     transitivePeerDependencies:
       - '@babel/core'
       - babel-plugin-macros
+
+  number-flow@0.6.0:
+    dependencies:
+      esm-env: 1.2.2
 
   oniguruma-parser@0.12.2: {}
 
