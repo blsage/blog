@@ -326,14 +326,30 @@ a {
 
 .article kbd {
   display: inline-block;
-  padding: 0 0.5em;
-  margin: 0 0.1em;
-  border: 1px solid #b3b3b3;
-  border-radius: 1em;
-  font-family: inherit;
-  font-size: 0.9em;
-  line-height: 1.35;
+  position: relative;
   white-space: nowrap;
+  user-select: none;
+  padding: 0.21875rem 0.3275rem 0.1875rem;
+  margin: 0 0.125rem 0 0.1875rem;
+  font-family: inherit;
+  font-size: 0.8125rem;
+  font-weight: 460;
+  line-height: 1;
+  letter-spacing: -0.0025rem;
+  border-radius: 10rem;
+  background: #fff;
+  box-shadow: inset 0 0 0 1px #111;
+}
+
+.article kbd[data-variant="solid"] {
+  background: #111;
+  color: #fff;
+  box-shadow: none;
+}
+
+.article kbd[data-variant="soft"] {
+  background: var(--color-hairline);
+  box-shadow: none;
 }
 
 .article .prompt {
@@ -793,8 +809,7 @@ figure[data-rehype-pretty-code-figure] pre code > [data-line]::before {
   100% {
     opacity: 0;
   }
-  8%,
-  45% {
+  10% {
     opacity: 1;
   }
 }
