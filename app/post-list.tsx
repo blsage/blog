@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { site } from "@/site.config";
 import type { Post } from "./get-posts";
+import { NewBadge } from "./new-badge";
 import styles from "./post-list.module.css";
 
 const NEW_BADGE_DAYS = 30;
@@ -35,9 +36,7 @@ export function PostList({ posts }: { posts: Post[] }) {
                       <Link href={`/${post.id}`}>
                         <h2>
                           {post.title}
-                          {isNew(post.date) && (
-                            <span className={styles.new}>New</span>
-                          )}
+                          {isNew(post.date) && <NewBadge />}
                         </h2>
                         <time dateTime={post.date}>
                           <span>{`${month} ${Number(d)}`}</span>

@@ -16,13 +16,20 @@
   margin: 0 0 2.375rem;
 }
 
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  transition: opacity 0.3s ease;
+}
+
 .inner p {
   color: var(--color-secondary);
   font-size: 0.8125rem;
   font-weight: 460;
   letter-spacing: -0.0025rem;
   font-variant-numeric: tabular-nums;
-  transition: opacity 0.3s ease;
 }
 
 .visible {
@@ -31,4 +38,67 @@
 
 .hidden {
   opacity: 0;
+}
+
+.phone {
+  overflow: visible;
+  flex-shrink: 0;
+}
+
+.phoneBody {
+  transform-origin: 50% 90%;
+  transform-box: fill-box;
+  animation: phoneBuzz 12s ease-in-out infinite;
+}
+
+.badge {
+  transform-origin: center;
+  transform-box: fill-box;
+  animation: badgePop 12s ease infinite;
+}
+
+@keyframes phoneBuzz {
+  0%,
+  80%,
+  88%,
+  100% {
+    transform: rotate(0deg);
+  }
+  82% {
+    transform: rotate(-3deg);
+  }
+  84% {
+    transform: rotate(2.5deg);
+  }
+  86% {
+    transform: rotate(-1.5deg);
+  }
+}
+
+@keyframes badgePop {
+  0%,
+  78% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  83%,
+  96% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .phoneBody,
+  .badge {
+    animation: none;
+  }
+
+  .badge {
+    opacity: 1;
+  }
 }

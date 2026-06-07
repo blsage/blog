@@ -27,7 +27,7 @@ export function MarginNote({
       type: "bracket",
       brackets: ["right"],
       color: "#1a1a1a",
-      strokeWidth: 1,
+      strokeWidth: 2,
       padding: [4, 7, 4, 0],
       iterations: 1,
       animationDuration: 700,

@@ -61,6 +61,7 @@ Everything below is styled out of the box — plain markdown or plain HTML, no i
 | Footnotes | `[^1]` in text, `[^1]: note` anywhere below — collected at the bottom under a short rule, click to return; external links inside get a box-arrow icon |
 | Highlights | `<mark>text</mark>` for the flat yellow marker; `<Highlight>text</Highlight>` (from `@/app/components/highlight`) for realistic ink strokes — angled gradient, uneven edges, denser ink at the ends; `color` accepts `blue`/`pink`/`yellow`/`green` or any CSS color |
 | Capsules | `<kbd>Continue</kbd>` — a rounded outline around inline words, for UI button labels |
+| Gradient words | `<Gradient from="#37e472" to="#bf5af2">Feature Name</Gradient>` (from `@/app/components/gradient`) — each letter interpolates between the two colors, selection tints per letter |
 | Definition lists | `<dl><dt>term</dt><dd>description</dd></dl>` — leader lines connect terms to right-aligned descriptions |
 | CTA cards | `<a className="cta" href="…">Primary text. <span>Secondary action.</span></a>` — full-width gray card with an ↗ arrow, for end-of-post calls to action |
 | Prompt boxes | `<aside className="prompt">…</aside>` — dashed rounded box in serif italic, for quoting prompts; add `data-label="Prompt Example"` for a yellow corner tag |

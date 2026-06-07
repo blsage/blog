@@ -1,5 +1,6 @@
 import { Counter } from "./counter";
 import { Highlight } from "@/app/components/highlight";
+import { Gradient } from "@/app/components/gradient";
 import { MarginNote } from "@/app/components/margin-note";
 
 export const metadata = {
@@ -49,7 +50,7 @@ That’s the part I care about most.[^1] A post about a gesture can contain the 
 
 ## The elements
 
-Everything a post might need is styled and ready, in plain markdown or plain HTML. *Emphasis* sets in Newsreader italic, **strong** stays Inter, and inline `code` gets a quiet tint. Text can be <mark>marked</mark> like a highlighter, or run over with <Highlight>blue</Highlight> or <Highlight color="pink">pink</Highlight> ink that pools at the edges of the stroke. UI labels like <kbd>Continue</kbd> wear capsule outlines.
+Everything a post might need is styled and ready, in plain markdown or plain HTML. *Emphasis* sets in Newsreader italic, **strong** stays Inter, and inline `code` gets a quiet tint. Text can be <mark>marked</mark> like a highlighter, or run over with <Highlight>blue</Highlight> or <Highlight color="pink">pink</Highlight> ink that pools at the edges of the stroke. UI labels like <kbd>Continue</kbd> wear capsule outlines, and feature names can run through a <Gradient>letter-by-letter gradient</Gradient>.
 
 > Blockquotes speak in an italic voice, with a hairline bar to the left.
 
@@ -79,7 +80,7 @@ Build a personal blog where every post is an MDX file that is its own route. One
 
 ## Make it yours
 
-The whole thing is a reusable template: [taylor-made](https://github.com/blsage/taylor-made). Everything personal lives in three files:
+The whole thing is a reusable template: [taylor-made](https://github.com/blsage/blog). Everything personal lives in three files:
 
 <dl>
   <dt>site.config.ts</dt>
@@ -92,7 +93,7 @@ The whole thing is a reusable template: [taylor-made](https://github.com/blsage/
 
 Swap those, add posts, and it’s yours.
 
-<a className="cta" href="https://github.com/blsage/taylor-made" target="_blank" rel="noopener noreferrer">
+<a className="cta" href="https://github.com/blsage/blog" target="_blank" rel="noopener noreferrer">
   taylor-made is on GitHub. <span>Use the template.</span>
 </a>
 
