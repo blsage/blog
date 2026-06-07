@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { ArticleAside } from "./article-aside";
 import { ArticleHeader } from "./article-header";
-import { ArticleTransition } from "./article-transition";
 import styles from "./article.module.css";
 
 export default function ArticleLayout({
@@ -10,7 +9,7 @@ export default function ArticleLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ArticleTransition>
+    <>
       <ArticleAside />
       <article className="article">
         <ArticleHeader />
@@ -21,6 +20,6 @@ export default function ArticleLayout({
           </Link>
         </footer>
       </article>
-    </ArticleTransition>
+    </>
   );
 }
