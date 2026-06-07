@@ -1,42 +1,20 @@
 export const metadata = {
   title: "Format phone numbers entirely in SwiftUI",
   description:
-    "Meet iPhoneNumberField 📱 — a TextField for phone numbers.",
+    "Real-time phone number formatting is harder than it looks. iPhoneNumberField makes it one line of SwiftUI.",
 };
 
-Meet iPhoneNumberField 📱 — a TextField for phone numbers. And it’s as easy as:
+Formatting a phone number sounds like an afternoon of work. It isn’t. Formatting one in real time — as someone types — means carrying formatting data for every country (and they’re nearly all different), reformatting on every keystroke, and moving the cursor programmatically so it lands in the right place as spaces, dashes, and parentheses appear around it. Then making all of that survive deletion, not just typing.
 
-```swift
-iPhoneNumberField("Phone", text: $text)
-```
+In UIKit you could hack it together. In SwiftUI, in 2020, it went from very hard to nearly impossible.
 
-## Introduction
+> Apple has this exact code — every iOS keyboard formats phone numbers. They’ve just never made it public.
 
-It seems like such an everyday thing: formatting a phone number. But it’s not. Formatting phone numbers in real time — as they’re typed — is hard. Even in established frameworks, it’s challenging. Among other things, you need to:
+So we built [iPhoneNumberField](https://github.com/MojtabaHs/iPhoneNumberField): real-time phone number formatting, entirely in SwiftUI.
 
-- Get all the data for how all countries format their phone numbers. And they’re pretty much all different.
-- Monitor the keyboard to format on each keystroke.
-- Move the cursor programmatically so it’s always in the right place even as you add spaces and dashes and parentheses.
-- Make sure it works for both typing and deleting.
+![iPhoneNumberField formatting a number as it’s typed](/format-phone-numbers/typing.gif "Formatting on every keystroke, cursor always in the right place.")
 
-And if you like working in SwiftUI, like many of us do, it goes from very hard to nearly impossible.
-
-> Wait, but Apple has this code, right? Shouldn’t they make it publicly available?
-
-Yes, and yes. But they don’t! So we did 😀. Introducing [iPhoneNumberField](https://github.com/MojtabaHs/iPhoneNumberField) — you can now format phone numbers entirely in SwiftUI.
-
-## Step 1: Install ⬇️
-
-Installing iPhoneNumberField is easy.
-
-1. Open Xcode. Go to File → Swift Packages → Add Package Dependency…
-2. Paste `https://github.com/MojtabaHs/iPhoneNumberField.git` and click Next.
-3. Select “Version: Up to Next Major” and click Next.
-4. Click Finish.
-
-## Step 2: Getting started 🎬
-
-The next step is to add iPhoneNumberField to your project.
+## One line
 
 ```swift
 import SwiftUI
@@ -51,15 +29,15 @@ struct ContentView: View {
 }
 ```
 
-If you want, you can stop here. Your work can literally be that easy. 🙂
+That’s the whole integration. Install it through Swift Package Manager — File → Add Package Dependency, paste `https://github.com/MojtabaHs/iPhoneNumberField.git`, take the default version rules — and the field works with the modifiers you already know: `.foregroundColor(_:)`, `.font(_:)`, `.multilineTextAlignment(_:)`, and so on.
 
-## Step 3: Customize (Optional) 🎀
+The rest of the API exists for the parts that are specific to phone numbers.
 
-iPhoneNumberField works with pretty much all the modifiers you’re used to. That includes `.foregroundColor(_:)`, `.font(_:)`, `.multilineTextAlignment(_:)`, `.border(_:)`, etc. It also has some new phone-number-field-specific features.
+![Flags, focus, and custom styles side by side](/format-phone-numbers/features.gif "Flags, programmatic focus, and custom styles.")
 
-### Feature 1: Flags 🇦🇶
+## Flags
 
-Flags are a very important part of a phone number text field, because there can be so many different countries represented. iPhoneNumberField can automatically detect your flag as you type, or it can give you a sheet of all the flags. To enable this, just type:
+A phone field that formats for every country should say *which* country. The field can detect the flag from what’s being typed, or present a sheet of all of them:
 
 ```swift
 iPhoneNumberField("Phone", text: $text)
@@ -67,9 +45,9 @@ iPhoneNumberField("Phone", text: $text)
     .flagSelectable(true)
 ```
 
-### Feature 2: Focus and unfocus 🔍
+## Focus
 
-Very often, your phone number field is on some page along with some other field, like a name field. Currently, in SwiftUI, the user has to tap on a different text field in order to move the focus. With iPhoneNumberField, it can all be easily done programmatically. Just use the built-in `isEditing` binding:
+A phone field usually lives on a screen with other fields, and in 2020 SwiftUI had no way to move focus between them programmatically. The field ships with an `isEditing` binding so the keyboard goes where your code says, not just where the user taps:
 
 ```swift
 @State var text = ""
@@ -78,9 +56,9 @@ Very often, your phone number field is on some page along with some other field,
 iPhoneNumberField("Phone", text: $text, isEditing: $isEditing)
 ```
 
-### Feature 3: Custom styles 🎁
+## Styling
 
-Your app has its own unique style, so it needs a phone number field that adapts. So we built in tons of custom modifiers for you, so you can format it just like you would format any other text field. Here’s what a custom style could look like:
+Everything else is modifiers, so the field can match whatever your app already looks like:
 
 ```swift
 iPhoneNumberField(text: $text)
@@ -95,21 +73,12 @@ iPhoneNumberField(text: $text)
     .shadow(color: .gray, radius: 10)
 ```
 
-There are an infinite number of ways you can go with this. For the full list of custom modifiers, check out the [GitHub](https://github.com/MojtabaHs/iPhoneNumberField).
+The full list of modifiers is in the [README](https://github.com/MojtabaHs/iPhoneNumberField). There’s also a [video walkthrough](https://www.youtube.com/watch?v=4SnmiWFvolM).
 
-## Conclusion
-
-Formatting phone numbers is a part of almost every app. There’s no reason it should be hard. And now, it’s not 😁.
-
-With iPhoneNumberField, you can check this off and get back to the fun stuff.
-
-## Resources
-
-- [GitHub](https://github.com/MojtabaHs/iPhoneNumberField)
-- [YouTube tutorial](https://www.youtube.com/watch?v=4SnmiWFvolM)
+Phone numbers are part of almost every app. There’s no reason this should be hard, and now it isn’t.
 
 <footer>
 # Note
 
-Originally published on [ITNEXT](https://itnext.io/format-phone-numbers-entirely-in-swiftui-9456f52990a1) in November 2020.
+Originally published on [ITNEXT](https://itnext.io/format-phone-numbers-entirely-in-swiftui-9456f52990a1) in November 2020, lightly rewritten for this site.
 </footer>
