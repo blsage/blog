@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Caveat, Inter, Newsreader } from "next/font/google";
+import { Inter, Newsreader, Reenie_Beanie } from "next/font/google";
 import { site } from "@/site.config";
 import "./globals.css";
 
@@ -16,8 +16,9 @@ const newsreader = Newsreader({
   display: "swap",
 });
 
-const caveat = Caveat({
+const reenieBeanie = Reenie_Beanie({
   subsets: ["latin"],
+  weight: "400",
   variable: "--font-cursive",
   display: "swap",
 });
@@ -39,7 +40,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${newsreader.variable} ${caveat.variable}`}
+      className={`${inter.variable} ${newsreader.variable} ${reenieBeanie.variable}`}
     >
       <body>
         <div className="top-fade" aria-hidden="true" />
