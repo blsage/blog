@@ -70,6 +70,10 @@
   transition: opacity 0.14s ease;
 }
 
+.new {
+  color: rgb(255, 0, 170);
+}
+
 .postList > ul > li > ul > li > a time {
   color: var(--color-secondary);
   font-size: 0.875rem;

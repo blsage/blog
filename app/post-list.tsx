@@ -3,6 +3,13 @@ import { site } from "@/site.config";
 import type { Post } from "./get-posts";
 import styles from "./post-list.module.css";
 
+const NEW_BADGE_DAYS = 30;
+
+function isNew(date: string): boolean {
+  const ageMs = Date.now() - new Date(`${date}T00:00:00Z`).getTime();
+  return ageMs < NEW_BADGE_DAYS * 24 * 60 * 60 * 1000;
+}
+
 export function PostList({ posts }: { posts: Post[] }) {
   const years = [...new Set(posts.map((post) => post.date.slice(0, 4)))];
 
@@ -20,7 +27,12 @@ export function PostList({ posts }: { posts: Post[] }) {
                   return (
                     <li key={post.id}>
                       <Link href={`/${post.id}`}>
-                        <h2>{post.title}</h2>
+                        <h2>
+                          {post.title}
+                          {isNew(post.date) && (
+                            <span className={styles.new}>New</span>
+                          )}
+                        </h2>
                         <time dateTime={post.date}>
                           <span>{`${d}/${m}`}</span>
                           <span>/</span>
