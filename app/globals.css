@@ -283,6 +283,35 @@ a {
   color: var(--color-secondary);
 }
 
+.article mark {
+  color: inherit;
+  background: none;
+}
+
+.article mark:not([data-marker]) {
+  display: inline-block;
+  position: relative;
+  line-height: 1;
+}
+
+.article mark:not([data-marker])::before {
+  pointer-events: none;
+  content: "";
+  z-index: -1;
+  position: absolute;
+  inset: 55% 0 0;
+  background: #fef9c0;
+}
+
+.article mark[data-marker="blue"] {
+  background: rgba(62, 159, 255, 0.16);
+  border-radius: 0.25rem;
+  padding: 0.1em 0.2em;
+  margin: -0.1em -0.05em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
 .article dl {
   position: relative;
   width: fit-content;
