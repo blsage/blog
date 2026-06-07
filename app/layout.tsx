@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Inter, Newsreader, Reenie_Beanie } from "next/font/google";
+import { Inter, Newsreader } from "next/font/google";
+import localFont from "next/font/local";
 import { site } from "@/site.config";
 import "./globals.css";
 
@@ -16,9 +17,8 @@ const newsreader = Newsreader({
   display: "swap",
 });
 
-const reenieBeanie = Reenie_Beanie({
-  subsets: ["latin"],
-  weight: "400",
+const handwriting = localFont({
+  src: "./fonts/handwriting.ttf",
   variable: "--font-cursive",
   display: "swap",
 });
@@ -40,7 +40,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${newsreader.variable} ${reenieBeanie.variable}`}
+      className={`${inter.variable} ${newsreader.variable} ${handwriting.variable}`}
     >
       <body>
         <div className="top-fade" aria-hidden="true" />
