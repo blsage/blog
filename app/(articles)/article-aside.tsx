@@ -53,7 +53,7 @@ export function ArticleAside() {
           aria-hidden="true"
         >
           <path
-            d="M5.5 3.5L2 7l3.5 3.5M2 7h10"
+            d="M5.5 4L2 7.5l3.5 3.5M2 7.5h7.5A2.5 2.5 0 0 0 12 5V3.5"
             stroke="currentColor"
             strokeLinecap="round"
             strokeLinejoin="round"
