@@ -27,6 +27,11 @@ function clockIn(timeZone: string): Clock {
   };
 }
 
+function isBrewing(clock: Clock): boolean {
+  const early = clock.meridiem === "AM" && (clock.hour === 12 || clock.hour < 6);
+  return !early;
+}
+
 export function Footer() {
   const [clock, setClock] = useState<Clock | null>(null);
 
@@ -58,50 +63,18 @@ export function Footer() {
               </>
             )}
           </p>
-          <svg
-            className={styles.phone}
-            width="26"
-            height="30"
-            viewBox="0 0 26 30"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            aria-hidden="true"
-          >
-            <g className={styles.phoneBody}>
-              <rect
-                x="6.7"
-                y="3.6"
-                width="13"
-                height="23"
-                rx="3.2"
-                stroke="rgba(0, 0, 0, 0.4)"
-                strokeWidth="1.4"
-              />
-              <rect
-                x="11"
-                y="6"
-                width="4.5"
-                height="1.6"
-                rx="0.8"
-                fill="rgba(0, 0, 0, 0.4)"
-              />
-              <rect
-                x="10.4"
-                y="23.4"
-                width="5.8"
-                height="1.1"
-                rx="0.55"
-                fill="rgba(0, 0, 0, 0.25)"
-              />
-              <circle
-                className={styles.badge}
-                cx="20"
-                cy="4.4"
-                r="3"
-                fill="rgb(255, 0, 170)"
-              />
-            </g>
-          </svg>
+          <span className={styles.cup} aria-hidden="true">
+            <span
+              className={`${styles.steam} ${
+                clock && isBrewing(clock) ? "" : styles.steamOff
+              }`}
+            >
+              <span className={styles.wisp1}>(</span>
+              <span className={styles.wisp2}>(</span>
+              <span className={styles.wisp3}>(</span>
+            </span>
+            c[_]
+          </span>
         </div>
       </div>
     </footer>
