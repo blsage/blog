@@ -1,7 +1,7 @@
 "use client";
 
 import NumberFlow from "@number-flow/react";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { site } from "@/site.config";
 import styles from "./footer.module.css";
 
@@ -11,7 +11,7 @@ interface Clock {
   meridiem: string;
 }
 
-const DIE_FACES = ["⚀", "⚁", "⚂", "⚃", "⚄", "⚅"];
+const REEL_SYMBOLS = ["♠", "♥", "♦", "♣", "7", "★"];
 
 function clockIn(timeZone: string): Clock {
   const parts = new Intl.DateTimeFormat("en-US", {
@@ -31,8 +31,7 @@ function clockIn(timeZone: string): Clock {
 
 export function Footer() {
   const [clock, setClock] = useState<Clock | null>(null);
-  const [dice, setDice] = useState<[number, number]>([4, 0]);
-  const [rolling, setRolling] = useState(false);
+  const [slot, setSlot] = useState({ reels: [4, 4, 4], locked: 3 });
 
   useEffect(() => {
     const update = () => setClock(clockIn(site.location.timeZone));
@@ -42,28 +41,42 @@ export function Footer() {
   }, []);
 
   useEffect(() => {
-    let shuffle: ReturnType<typeof setInterval>;
-    const roll = () => {
-      setRolling(true);
-      let ticks = 0;
-      shuffle = setInterval(() => {
-        setDice([
-          Math.floor(Math.random() * 6),
-          Math.floor(Math.random() * 6),
-        ]);
-        ticks++;
-        if (ticks >= 8) {
-          clearInterval(shuffle);
-          setRolling(false);
-        }
-      }, 75);
+    const rand = () => Math.floor(Math.random() * REEL_SYMBOLS.length);
+    let ticker: ReturnType<typeof setInterval>;
+    const timeouts: ReturnType<typeof setTimeout>[] = [];
+
+    const spin = () => {
+      setSlot((s) => ({ ...s, locked: 0 }));
+      ticker = setInterval(() => {
+        setSlot((s) =>
+          s.locked >= 3
+            ? s
+            : {
+                ...s,
+                reels: s.reels.map((v, i) => (i >= s.locked ? rand() : v)),
+              }
+        );
+      }, 70);
+      timeouts.push(
+        setTimeout(() => setSlot((s) => ({ ...s, locked: 1 })), 600),
+        setTimeout(() => setSlot((s) => ({ ...s, locked: 2 })), 1000),
+        setTimeout(() => {
+          setSlot((s) => ({ ...s, locked: 3 }));
+          clearInterval(ticker);
+        }, 1400)
+      );
     };
-    const interval = setInterval(roll, 5000);
+
+    const interval = setInterval(spin, 6000);
     return () => {
       clearInterval(interval);
-      clearInterval(shuffle);
+      clearInterval(ticker);
+      timeouts.forEach(clearTimeout);
     };
   }, []);
+
+  const jackpot =
+    slot.locked === 3 && slot.reels.every((r) => r === slot.reels[0]);
 
   return (
     <footer className={styles.footer}>
@@ -86,11 +99,23 @@ export function Footer() {
             )}
           </p>
           <span
-            className={`${styles.dice} ${rolling ? styles.rolling : ""}`}
+            className={`${styles.slot} ${jackpot ? styles.jackpot : ""}`}
             aria-hidden="true"
           >
-            <span className={styles.die}>{DIE_FACES[dice[0]]}</span>{" "}
-            <span className={styles.die}>{DIE_FACES[dice[1]]}</span>
+            [
+            {slot.reels.map((r, i) => (
+              <Fragment key={i}>
+                {i > 0 && "|"}
+                <span
+                  className={`${styles.reel} ${
+                    i >= slot.locked ? styles.spinning : ""
+                  }`}
+                >
+                  {REEL_SYMBOLS[r]}
+                </span>
+              </Fragment>
+            ))}
+            ]
           </span>
         </div>
       </div>

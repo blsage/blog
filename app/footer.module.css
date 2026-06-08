@@ -40,62 +40,70 @@
   opacity: 0;
 }
 
-.dice {
+.slot {
   flex-shrink: 0;
-  display: inline-block;
-  font-size: 1.125rem;
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-code);
+  font-size: 0.8125rem;
   line-height: 1;
   color: var(--color-secondary);
-  letter-spacing: 0.1em;
   user-select: none;
 }
 
-.die {
+.reel {
   display: inline-block;
-  animation: dieWobble 2.8s ease-in-out infinite;
+  width: 1.15em;
+  text-align: center;
+  animation: reelIdle 3s ease-in-out infinite;
 }
 
-.die:last-child {
-  animation-delay: 1.3s;
-  animation-duration: 3.3s;
+.reel:nth-of-type(2) {
+  animation-delay: 1s;
+  animation-duration: 3.4s;
 }
 
-.rolling .die {
-  animation: diceShake 0.15s ease-in-out infinite;
+.reel:nth-of-type(3) {
+  animation-delay: 2s;
+  animation-duration: 2.7s;
 }
 
-@keyframes dieWobble {
+.spinning {
+  animation: reelSpin 0.14s linear infinite;
+}
+
+.jackpot .reel {
+  color: rgb(255, 0, 170);
+}
+
+@keyframes reelIdle {
   0%,
   100% {
-    transform: rotate(0deg) translateY(0);
+    transform: translateY(0);
   }
-  22% {
-    transform: rotate(6deg) translateY(-0.5px);
+  30% {
+    transform: translateY(-0.5px);
   }
-  48% {
-    transform: rotate(-2deg) translateY(0);
-  }
-  72% {
-    transform: rotate(-6deg) translateY(0.5px);
+  65% {
+    transform: translateY(0.5px);
   }
 }
 
-@keyframes diceShake {
-  0%,
+@keyframes reelSpin {
+  0% {
+    transform: translateY(-2px);
+  }
+  50% {
+    transform: translateY(2px);
+  }
   100% {
-    transform: translateY(0) rotate(0deg);
-  }
-  25% {
-    transform: translateY(-1px) rotate(-4deg);
-  }
-  75% {
-    transform: translateY(1px) rotate(4deg);
+    transform: translateY(-2px);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .die,
-  .rolling .die {
+  .reel,
+  .spinning {
     animation: none;
   }
 }
