@@ -225,7 +225,7 @@ export function Footer() {
                     value={clock.minute}
                     format={{ minimumIntegerDigits: 2 }}
                   />
-                  {` ${clock.meridiem} in ${site.location.city}, ${site.location.region}`}
+                  {` ${clock.meridiem} in ${site.location.city}, ${site.location.region}`}
                 </>
               )}
             </span>
