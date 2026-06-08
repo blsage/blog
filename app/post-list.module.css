@@ -82,6 +82,7 @@
 
 .new {
   color: rgb(255, 0, 170);
+  margin-left: 0.375rem;
 }
 
 .postList > ul > li > ul > li > a time {
