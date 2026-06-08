@@ -17,19 +17,14 @@
 }
 
 .row {
-  display: flex;
+  appearance: none;
+  background: none;
+  cursor: pointer;
+  display: inline-flex;
   align-items: center;
-  justify-content: flex-start;
   gap: 0.5rem;
+  text-align: left;
   transition: opacity 0.3s ease;
-}
-
-.inner p {
-  color: var(--color-secondary);
-  font-size: 0.8125rem;
-  font-weight: 460;
-  letter-spacing: -0.0025rem;
-  font-variant-numeric: tabular-nums;
 }
 
 .visible {
@@ -40,73 +35,108 @@
   opacity: 0;
 }
 
-.slot {
-  appearance: none;
-  background: none;
-  cursor: pointer;
-  flex-shrink: 0;
-  display: inline-flex;
-  align-items: center;
-  font-family: var(--font-code);
-  font-size: 0.8125rem;
-  line-height: 1;
+.swap {
+  display: grid;
+}
+
+.swap > span {
+  grid-area: 1 / 1;
   color: var(--color-secondary);
-  user-select: none;
+  font-size: 0.8125rem;
+  font-weight: 460;
+  letter-spacing: -0.0025rem;
+  line-height: 1.25rem;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  transition: opacity 0.25s ease, transform 0.25s ease;
 }
 
-.reel {
-  display: inline-block;
-  width: 1.15em;
-  text-align: center;
-  animation: reelIdle 3s ease-in-out infinite;
+.clockLine {
+  opacity: 1;
+  transform: none;
 }
 
-.reel:nth-of-type(2) {
-  animation-delay: 1s;
-  animation-duration: 3.4s;
+.music .clockLine {
+  opacity: 0;
+  transform: translateY(-0.5rem);
 }
 
-.reel:nth-of-type(3) {
-  animation-delay: 2s;
-  animation-duration: 2.7s;
+.trackLine {
+  opacity: 0;
+  transform: translateY(0.5rem);
 }
 
-.spinning {
-  animation: reelSpin 0.14s linear infinite;
+.music .trackLine {
+  opacity: 1;
+  transform: none;
 }
 
-.jackpot .reel {
-  color: rgb(255, 0, 170);
+.bars {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 1.5px;
+  height: 0.7rem;
+  flex-shrink: 0;
+  transform: translateY(-1px);
 }
 
-@keyframes reelIdle {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  30% {
-    transform: translateY(-0.5px);
-  }
-  65% {
-    transform: translateY(0.5px);
-  }
+.bars span {
+  width: 2px;
+  border-radius: 1px;
+  background: var(--color-secondary);
+  height: 30%;
+  transform: scaleY(0.25);
+  transform-origin: bottom;
+  transition: transform 0.3s ease;
 }
 
-@keyframes reelSpin {
+.bars span:nth-child(2) {
+  height: 55%;
+}
+
+.bars span:nth-child(3) {
+  height: 40%;
+}
+
+.bars span:nth-child(4) {
+  height: 60%;
+}
+
+.music .bars span {
+  transform: scaleY(1);
+}
+
+.playing .bars span {
+  animation: barDance 0.55s ease-in-out infinite alternate;
+}
+
+.playing .bars span:nth-child(2) {
+  animation-delay: 0.15s;
+  animation-duration: 0.42s;
+}
+
+.playing .bars span:nth-child(3) {
+  animation-delay: 0.3s;
+  animation-duration: 0.6s;
+}
+
+.playing .bars span:nth-child(4) {
+  animation-delay: 0.1s;
+  animation-duration: 0.48s;
+}
+
+@keyframes barDance {
   0% {
-    transform: translateY(-2px);
-  }
-  50% {
-    transform: translateY(2px);
+    transform: scaleY(0.4);
   }
   100% {
-    transform: translateY(-2px);
+    transform: scaleY(1.6);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .reel,
-  .spinning {
+  .playing .bars span {
     animation: none;
+    transform: scaleY(1);
   }
 }
