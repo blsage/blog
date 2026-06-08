@@ -92,56 +92,38 @@
   background: var(--color-secondary);
 }
 
-@keyframes tick {
-  from {
-    transform: translateX(-50%) rotate(-24deg);
+@keyframes breathe {
+  0%,
+  100% {
+    opacity: 0.65;
+    transform: scale(1);
   }
-  to {
-    transform: translateX(-50%) rotate(24deg);
+  50% {
+    opacity: 1;
+    transform: scale(1.08);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .pendulum {
+  .play svg {
     animation: none;
-    transform: translateX(-50%);
   }
 }
 
-.metronome {
-  position: relative;
-  width: 14px;
-  height: 12px;
+.play {
+  display: flex;
+  align-items: center;
   margin-left: 0.5rem;
   flex-shrink: 0;
   transition: opacity 0.25s ease, transform 0.25s ease;
 }
 
-.metronome::after {
-  content: "";
-  position: absolute;
-  bottom: -1px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 3.5px;
-  height: 3.5px;
-  border-radius: 50%;
-  background: var(--color-secondary);
+.play svg {
+  display: block;
+  animation: breathe 2.8s ease-in-out infinite;
 }
 
-.pendulum {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  width: 1.5px;
-  height: 11px;
-  border-radius: 1px;
-  background: var(--color-secondary);
-  transform-origin: bottom center;
-  animation: tick 0.9s ease-in-out infinite alternate;
-}
-
-.music .metronome {
+.music .play {
   opacity: 0;
   transform: translateY(-0.5rem);
 }

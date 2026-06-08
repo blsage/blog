@@ -245,8 +245,21 @@ export function Footer() {
               {track.title} by {track.artist}
             </span>
           </span>
-          <span className={styles.metronome} aria-hidden="true">
-            <span className={styles.pendulum} />
+          <span className={styles.play} aria-hidden="true">
+            <svg
+              width="10"
+              height="12"
+              viewBox="0 0 10 12"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M1.2 1.6v8.8c0 .5.54.82.97.56l7.2-4.4a.65.65 0 0 0 0-1.12l-7.2-4.4a.65.65 0 0 0-.97.56Z"
+                stroke="rgba(0, 0, 0, 0.4)"
+                strokeWidth="1.1"
+                strokeLinejoin="round"
+              />
+            </svg>
           </span>
         </button>
       </div>
