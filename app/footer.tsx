@@ -12,6 +12,10 @@ interface Clock {
   meridiem: string;
 }
 
+const BAR_COUNT = 6;
+const BAR_MIN = 3;
+const BAR_MAX = 12;
+
 function clockIn(timeZone: string): Clock {
   const parts = new Intl.DateTimeFormat("en-US", {
     hour: "numeric",
@@ -35,12 +39,36 @@ function trackOfTheDay(): number {
   return day % PLAYLIST.length;
 }
 
+function bucketValue(data: Uint8Array, barIndex: number): number {
+  const start = Math.max(
+    1,
+    Math.floor(Math.pow(data.length, barIndex / BAR_COUNT))
+  );
+  const end = Math.max(
+    start + 1,
+    Math.floor(Math.pow(data.length, (barIndex + 1) / BAR_COUNT))
+  );
+  let sum = 0;
+  for (let i = start; i < end; i++) sum += data[i];
+  return sum / (end - start);
+}
+
 export function Footer() {
   const [clock, setClock] = useState<Clock | null>(null);
   const [trackIndex, setTrackIndex] = useState(0);
   const [playing, setPlaying] = useState(false);
   const [hover, setHover] = useState(false);
+
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const audioContextRef = useRef<AudioContext | null>(null);
+  const analyserRef = useRef<AnalyserNode | null>(null);
+  const barsRef = useRef<HTMLSpanElement | null>(null);
+  const rafRef = useRef<number>(0);
+  const playingRef = useRef(false);
+  const maxesRef = useRef<number[]>(Array(BAR_COUNT).fill(100));
+  const heightsRef = useRef<number[]>(Array(BAR_COUNT).fill(BAR_MIN));
+  const silentFramesRef = useRef(0);
+  const fallbackTargetsRef = useRef<number[]>(Array(BAR_COUNT).fill(BAR_MIN));
 
   useEffect(() => {
     setTrackIndex(trackOfTheDay());
@@ -49,9 +77,80 @@ export function Footer() {
     const interval = setInterval(update, 1000);
     return () => {
       clearInterval(interval);
+      cancelAnimationFrame(rafRef.current);
       audioRef.current?.pause();
+      audioContextRef.current?.close();
     };
   }, []);
+
+  const renderBars = () => {
+    const container = barsRef.current;
+    if (!container) return;
+    const spans = container.children;
+    heightsRef.current.forEach((h, i) => {
+      const bar = spans[i] as HTMLElement;
+      if (bar) bar.style.height = `${h}px`;
+    });
+  };
+
+  const draw = () => {
+    if (playingRef.current && analyserRef.current) {
+      const data = new Uint8Array(analyserRef.current.frequencyBinCount);
+      analyserRef.current.getByteFrequencyData(data);
+      const total = data.reduce((a, b) => a + b, 0);
+
+      if (total === 0) {
+        silentFramesRef.current++;
+      } else {
+        silentFramesRef.current = 0;
+      }
+
+      if (silentFramesRef.current > 30) {
+        heightsRef.current = heightsRef.current.map((h, i) => {
+          const target = fallbackTargetsRef.current[i];
+          if (Math.abs(h - target) < 0.5) {
+            fallbackTargetsRef.current[i] =
+              BAR_MIN + Math.random() * (BAR_MAX - BAR_MIN);
+          }
+          return h + (target - h) * 0.25;
+        });
+      } else {
+        heightsRef.current = heightsRef.current.map((_, i) => {
+          const value = bucketValue(data, i);
+          if (value > maxesRef.current[i]) maxesRef.current[i] = value;
+          const normalized = value / maxesRef.current[i];
+          const curved = Math.pow(normalized, 5);
+          return curved * (BAR_MAX - BAR_MIN) + BAR_MIN;
+        });
+      }
+      renderBars();
+      rafRef.current = requestAnimationFrame(draw);
+    } else {
+      heightsRef.current = heightsRef.current.map((h) =>
+        Math.max(BAR_MIN, h * 0.9)
+      );
+      renderBars();
+      if (heightsRef.current.some((h) => h > BAR_MIN)) {
+        rafRef.current = requestAnimationFrame(draw);
+      }
+    }
+  };
+
+  const ensureAnalyser = () => {
+    if (audioContextRef.current || !audioRef.current) return;
+    const Ctx =
+      window.AudioContext ||
+      (window as unknown as { webkitAudioContext: typeof AudioContext })
+        .webkitAudioContext;
+    const ctx = new Ctx();
+    const source = ctx.createMediaElementSource(audioRef.current);
+    const analyser = ctx.createAnalyser();
+    analyser.fftSize = 256;
+    source.connect(analyser);
+    analyser.connect(ctx.destination);
+    audioContextRef.current = ctx;
+    analyserRef.current = analyser;
+  };
 
   const play = async (i: number) => {
     const track = PLAYLIST[i];
@@ -64,7 +163,10 @@ export function Footer() {
       const data = await res.json();
       const url = data.results?.[0]?.previewUrl;
       if (!url) return;
-      if (!audioRef.current) audioRef.current = new Audio();
+      if (!audioRef.current) {
+        audioRef.current = new Audio();
+        audioRef.current.crossOrigin = "anonymous";
+      }
       const audio = audioRef.current;
       audio.src = url;
       audio.onended = () => {
@@ -72,9 +174,16 @@ export function Footer() {
         setTrackIndex(next);
         play(next);
       };
+      ensureAnalyser();
+      audioContextRef.current?.resume();
       await audio.play();
+      silentFramesRef.current = 0;
+      playingRef.current = true;
       setPlaying(true);
+      cancelAnimationFrame(rafRef.current);
+      rafRef.current = requestAnimationFrame(draw);
     } catch {
+      playingRef.current = false;
       setPlaying(false);
     }
   };
@@ -82,6 +191,7 @@ export function Footer() {
   const toggle = () => {
     if (playing) {
       audioRef.current?.pause();
+      playingRef.current = false;
       setPlaying(false);
     } else {
       play(trackIndex);
@@ -97,7 +207,7 @@ export function Footer() {
         <button
           className={`${styles.row} ${clock ? styles.visible : styles.hidden} ${
             musicMode ? styles.music : ""
-          } ${playing ? styles.playing : ""}`}
+          }`}
           onMouseEnter={() => setHover(true)}
           onMouseLeave={() => setHover(false)}
           onClick={toggle}
@@ -121,10 +231,12 @@ export function Footer() {
               )}
             </span>
             <span className={styles.trackLine}>
-              {track.title} — {track.artist}
+              {track.title} by {track.artist}
             </span>
           </span>
-          <span className={styles.bars} aria-hidden="true">
+          <span className={styles.bars} ref={barsRef} aria-hidden="true">
+            <span />
+            <span />
             <span />
             <span />
             <span />
