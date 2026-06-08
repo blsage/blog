@@ -67,7 +67,7 @@ export function Footer() {
       );
     };
 
-    const interval = setInterval(spin, 6000);
+    const interval = setInterval(spin, 9000);
     return () => {
       clearInterval(interval);
       clearInterval(ticker);
