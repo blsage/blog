@@ -199,7 +199,7 @@ export function Footer() {
   };
 
   const track = PLAYLIST[trackIndex];
-  const musicMode = playing || hover;
+  const musicMode = hover;
 
   return (
     <footer className={styles.footer}>
