@@ -23,6 +23,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
+  height: 1.5rem;
   text-align: left;
   transition: opacity 0.3s ease;
 }
@@ -37,6 +38,8 @@
 
 .swap {
   display: grid;
+  align-items: center;
+  height: 100%;
 }
 
 .swap > span {
