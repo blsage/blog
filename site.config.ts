@@ -6,8 +6,8 @@ export const site = {
   updated: "2026-06-06",
   listTitle: "Writing",
   location: {
-    city: "San Francisco",
-    region: "California",
+    city: "Las Vegas",
+    region: "Nevada",
     timeZone: "America/Los_Angeles",
   },
 };
