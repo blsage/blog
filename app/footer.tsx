@@ -32,13 +32,6 @@ function clockIn(timeZone: string): Clock {
   };
 }
 
-function trackOfTheDay(): number {
-  const now = new Date();
-  const start = new Date(now.getFullYear(), 0, 0);
-  const day = Math.floor((now.getTime() - start.getTime()) / 86400000);
-  return day % PLAYLIST.length;
-}
-
 function bucketValue(data: Uint8Array, barIndex: number): number {
   const start = Math.max(
     1,
@@ -71,7 +64,7 @@ export function Footer() {
   const fallbackTargetsRef = useRef<number[]>(Array(BAR_COUNT).fill(BAR_MIN));
 
   useEffect(() => {
-    setTrackIndex(trackOfTheDay());
+    setTrackIndex(Math.floor(Math.random() * PLAYLIST.length));
     const update = () => setClock(clockIn(site.location.timeZone));
     update();
     const interval = setInterval(update, 1000);
