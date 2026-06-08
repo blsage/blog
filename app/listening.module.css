@@ -26,25 +26,21 @@
   border-radius: 1px;
   background: var(--color-secondary);
   height: 30%;
-  animation: barIdle 2.6s ease-in-out infinite;
+  transform: scaleY(0.2);
+  transform-origin: bottom;
+  transition: transform 0.4s ease;
 }
 
 .bars span:nth-child(2) {
   height: 55%;
-  animation-delay: 0.4s;
-  animation-duration: 3.1s;
 }
 
 .bars span:nth-child(3) {
   height: 40%;
-  animation-delay: 0.9s;
-  animation-duration: 2.3s;
 }
 
 .bars span:nth-child(4) {
   height: 60%;
-  animation-delay: 1.3s;
-  animation-duration: 2.9s;
 }
 
 .playing span {
@@ -84,16 +80,6 @@
   max-width: 18rem;
   opacity: 1;
   padding-left: 0.5rem;
-}
-
-@keyframes barIdle {
-  0%,
-  100% {
-    transform: scaleY(1);
-  }
-  50% {
-    transform: scaleY(1.6);
-  }
 }
 
 @keyframes barDance {
