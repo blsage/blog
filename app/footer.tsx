@@ -234,13 +234,19 @@ export function Footer() {
               {track.title} by {track.artist}
             </span>
           </span>
-          <span className={styles.bars} ref={barsRef} aria-hidden="true">
-            <span />
-            <span />
-            <span />
-            <span />
-            <span />
-            <span />
+          <span className={styles.glyphSwap} aria-hidden="true">
+            <span className={styles.note}>
+              <span className={styles.noteA}>♪</span>
+              <span className={styles.noteB}>♫</span>
+            </span>
+            <span className={styles.bars} ref={barsRef}>
+              <span />
+              <span />
+              <span />
+              <span />
+              <span />
+              <span />
+            </span>
           </span>
         </button>
       </div>

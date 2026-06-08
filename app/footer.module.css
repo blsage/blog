@@ -74,12 +74,59 @@
   transform: none;
 }
 
+.glyphSwap {
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  width: 26px;
+  height: 100%;
+  flex-shrink: 0;
+}
+
+.glyphSwap > span {
+  grid-area: 1 / 1;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.note {
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  color: var(--color-secondary);
+  font-size: 0.9375rem;
+  line-height: 1;
+  animation: noteBob 3.2s ease-in-out infinite;
+}
+
+.note > span {
+  grid-area: 1 / 1;
+}
+
+.noteA {
+  animation: noteSwapA 6s ease-in-out infinite;
+}
+
+.noteB {
+  animation: noteSwapB 6s ease-in-out infinite;
+}
+
+.music .note {
+  opacity: 0;
+  transform: translateY(-0.5rem);
+}
+
 .bars {
   display: inline-flex;
   align-items: center;
   gap: 1.5px;
   height: 12px;
-  flex-shrink: 0;
+  opacity: 0;
+  transform: translateY(0.5rem);
+}
+
+.music .bars {
+  opacity: 1;
+  transform: none;
 }
 
 .bars span {
@@ -87,4 +134,57 @@
   height: 3px;
   border-radius: 1.5px;
   background: var(--color-secondary);
+}
+
+@keyframes noteBob {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  30% {
+    transform: translateY(-1px) rotate(-4deg);
+  }
+  65% {
+    transform: translateY(0.5px) rotate(4deg);
+  }
+}
+
+@keyframes noteSwapA {
+  0%,
+  44% {
+    opacity: 1;
+  }
+  50%,
+  94% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes noteSwapB {
+  0%,
+  44% {
+    opacity: 0;
+  }
+  50%,
+  94% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .note,
+  .noteA,
+  .noteB {
+    animation: none;
+  }
+
+  .noteB {
+    opacity: 0;
+  }
 }
