@@ -244,10 +244,60 @@ export function Footer() {
               {track.title} by {track.artist}
             </span>
           </span>
-          <span className={styles.vinyl} aria-hidden="true">
-            <span className={styles.spinner}>
-              <span className={styles.fleck} />
-            </span>
+          <span className={styles.cassette} aria-hidden="true">
+            <svg
+              width="30"
+              height="20"
+              viewBox="0 0 30 20"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect
+                x="0.7"
+                y="0.7"
+                width="28.6"
+                height="18.6"
+                rx="2.4"
+                stroke="rgba(0, 0, 0, 0.4)"
+                strokeWidth="1.2"
+              />
+              <g className={styles.reel}>
+                <circle
+                  cx="9.5"
+                  cy="9"
+                  r="4"
+                  stroke="rgba(0, 0, 0, 0.4)"
+                  strokeWidth="1.1"
+                />
+                <path
+                  d="M9.5 9V5.6M9.5 9l2.9 1.7M9.5 9l-2.9 1.7"
+                  stroke="rgba(0, 0, 0, 0.4)"
+                  strokeWidth="1"
+                  strokeLinecap="round"
+                />
+              </g>
+              <g className={styles.reel}>
+                <circle
+                  cx="20.5"
+                  cy="9"
+                  r="4"
+                  stroke="rgba(0, 0, 0, 0.4)"
+                  strokeWidth="1.1"
+                />
+                <path
+                  d="M20.5 9V5.6M20.5 9l2.9 1.7M20.5 9l-2.9 1.7"
+                  stroke="rgba(0, 0, 0, 0.4)"
+                  strokeWidth="1"
+                  strokeLinecap="round"
+                />
+              </g>
+              <path
+                d="M11 16h8"
+                stroke="rgba(0, 0, 0, 0.4)"
+                strokeWidth="1.1"
+                strokeLinecap="round"
+              />
+            </svg>
           </span>
         </button>
       </div>
