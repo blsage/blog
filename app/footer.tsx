@@ -58,7 +58,7 @@ export function Footer() {
         }
       }, 75);
     };
-    const interval = setInterval(roll, 10000);
+    const interval = setInterval(roll, 5000);
     return () => {
       clearInterval(interval);
       clearInterval(shuffle);
@@ -89,7 +89,8 @@ export function Footer() {
             className={`${styles.dice} ${rolling ? styles.rolling : ""}`}
             aria-hidden="true"
           >
-            {DIE_FACES[dice[0]]} {DIE_FACES[dice[1]]}
+            <span className={styles.die}>{DIE_FACES[dice[0]]}</span>{" "}
+            <span className={styles.die}>{DIE_FACES[dice[1]]}</span>
           </span>
         </div>
       </div>

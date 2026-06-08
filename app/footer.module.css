@@ -50,8 +50,34 @@
   user-select: none;
 }
 
-.rolling {
+.die {
+  display: inline-block;
+  animation: dieWobble 2.8s ease-in-out infinite;
+}
+
+.die:last-child {
+  animation-delay: 1.3s;
+  animation-duration: 3.3s;
+}
+
+.rolling .die {
   animation: diceShake 0.15s ease-in-out infinite;
+}
+
+@keyframes dieWobble {
+  0%,
+  100% {
+    transform: rotate(0deg) translateY(0);
+  }
+  22% {
+    transform: rotate(6deg) translateY(-0.5px);
+  }
+  48% {
+    transform: rotate(-2deg) translateY(0);
+  }
+  72% {
+    transform: rotate(-6deg) translateY(0.5px);
+  }
 }
 
 @keyframes diceShake {
@@ -68,7 +94,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .rolling {
+  .die,
+  .rolling .die {
     animation: none;
   }
 }
