@@ -13,8 +13,8 @@ interface Clock {
 }
 
 const BAR_COUNT = 6;
-const BAR_MIN = 3;
-const BAR_MAX = 12;
+const BAR_MIN = 2;
+const BAR_MAX = 11;
 
 function clockIn(timeZone: string): Clock {
   const parts = new Intl.DateTimeFormat("en-US", {
@@ -215,6 +215,23 @@ export function Footer() {
             playing ? "Pause" : `Play ${track.title} by ${track.artist}`
           }
         >
+          <span className={styles.glyphSwap} aria-hidden="true">
+            <span className={styles.note}>
+              <span className={styles.noteInner}>
+                ·<span className={styles.arc1}>)</span>
+                <span className={styles.arc2}>)</span>
+                <span className={styles.arc3}>)</span>
+              </span>
+            </span>
+            <span className={styles.bars} ref={barsRef}>
+              <span />
+              <span />
+              <span />
+              <span />
+              <span />
+              <span />
+            </span>
+          </span>
           <span className={styles.swap}>
             <span className={styles.clockLine}>
               {clock && (
@@ -232,22 +249,6 @@ export function Footer() {
             </span>
             <span className={styles.trackLine}>
               {track.title} by {track.artist}
-            </span>
-          </span>
-          <span className={styles.glyphSwap} aria-hidden="true">
-            <span className={styles.note}>
-              <span className={styles.noteInner}>
-                <span className={styles.noteA}>d[-_-]b</span>
-                <span className={styles.noteB}>d[•_•]b</span>
-              </span>
-            </span>
-            <span className={styles.bars} ref={barsRef}>
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
             </span>
           </span>
         </button>
