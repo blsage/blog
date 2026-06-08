@@ -19,8 +19,8 @@
 .row {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
+  justify-content: flex-start;
+  gap: 0.875rem;
   transition: opacity 0.3s ease;
 }
 
@@ -40,70 +40,35 @@
   opacity: 0;
 }
 
-.cup {
-  position: relative;
+.dice {
   flex-shrink: 0;
-  font-family: var(--font-code);
-  font-size: 0.8125rem;
+  display: inline-block;
+  font-size: 1.125rem;
+  line-height: 1;
   color: var(--color-secondary);
+  letter-spacing: 0.1em;
   user-select: none;
 }
 
-.steam {
-  position: absolute;
-  bottom: 0.95em;
-  left: 0.55em;
-  font-size: 0.7em;
+.rolling {
+  animation: diceShake 0.15s ease-in-out infinite;
 }
 
-.steam span {
-  position: absolute;
-  bottom: 0;
-  display: inline-block;
-  opacity: 0;
-  animation: steamRise 10s ease-out infinite;
-}
-
-.wisp1 {
-  left: 0;
-}
-
-.wisp2 {
-  left: 0.55em;
-  animation-delay: 0.7s !important;
-}
-
-.wisp3 {
-  left: 1.1em;
-  animation-delay: 1.4s !important;
-}
-
-.steamOff span {
-  animation: none;
-  opacity: 0;
-}
-
-@keyframes steamRise {
-  0% {
-    opacity: 0;
-    transform: translateY(2px) rotate(8deg);
-  }
-  6% {
-    opacity: 0.8;
-  }
-  18% {
-    opacity: 0.3;
-    transform: translateY(-6px) rotate(-6deg);
-  }
-  26%,
+@keyframes diceShake {
+  0%,
   100% {
-    opacity: 0;
-    transform: translateY(-9px) rotate(0deg);
+    transform: translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-1px) rotate(-4deg);
+  }
+  75% {
+    transform: translateY(1px) rotate(4deg);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .steam span {
+  .rolling {
     animation: none;
   }
 }
