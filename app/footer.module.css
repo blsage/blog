@@ -22,7 +22,6 @@
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
   height: 1.5rem;
   text-align: left;
   transition: opacity 0.3s ease;
@@ -74,91 +73,85 @@
   transform: none;
 }
 
-.glyphSwap {
-  display: grid;
-  align-items: center;
-  justify-items: start;
-  width: 24px;
-  height: 100%;
-  flex-shrink: 0;
-}
-
-.glyphSwap > span {
-  grid-area: 1 / 1;
-  transition: opacity 0.25s ease, transform 0.25s ease;
-}
-
-.note {
-  color: var(--color-secondary);
-  font-family: var(--font-code);
-  font-size: 0.8125rem;
-  letter-spacing: 0.02em;
-  line-height: 1;
-  white-space: nowrap;
-}
-
-.noteInner {
-  display: inline-flex;
-  align-items: center;
-}
-
-.noteInner > span {
-  opacity: 0.25;
-  animation: arcPing 2.1s ease-in-out infinite;
-}
-
-.arc1 {
-  animation-delay: 0s;
-}
-
-.arc2 {
-  animation-delay: 0.25s;
-}
-
-.arc3 {
-  animation-delay: 0.5s;
-}
-
-.music .note {
-  opacity: 0;
-  transform: translateY(-0.5rem);
-}
-
-.bars {
+.barsSlot {
   display: inline-flex;
   align-items: center;
   gap: 1.5px;
   height: 11px;
+  width: 0;
+  margin-right: 0;
   opacity: 0;
   transform: translateY(0.5rem);
+  overflow: hidden;
+  flex-shrink: 0;
+  transition: width 0.25s ease, margin 0.25s ease, opacity 0.25s ease,
+    transform 0.25s ease;
 }
 
-.music .bars {
+.music .barsSlot {
+  width: 22px;
+  margin-right: 0.5rem;
   opacity: 1;
   transform: none;
 }
 
-.bars span {
+.barsSlot span {
   width: 2px;
   height: 2px;
   border-radius: 1px;
   background: var(--color-secondary);
 }
 
-@keyframes arcPing {
-  0%,
-  55%,
-  100% {
-    opacity: 0.25;
+@keyframes tick {
+  from {
+    transform: translateX(-50%) rotate(-24deg);
   }
-  18% {
-    opacity: 1;
+  to {
+    transform: translateX(-50%) rotate(24deg);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .noteInner > span {
+  .pendulum {
     animation: none;
-    opacity: 0.6;
+    transform: translateX(-50%);
   }
+}
+
+.metronome {
+  position: relative;
+  width: 14px;
+  height: 12px;
+  margin-left: 0.5rem;
+  flex-shrink: 0;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.metronome::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3.5px;
+  height: 3.5px;
+  border-radius: 50%;
+  background: var(--color-secondary);
+}
+
+.pendulum {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 1.5px;
+  height: 11px;
+  border-radius: 1px;
+  background: var(--color-secondary);
+  transform-origin: bottom center;
+  animation: tick 0.9s ease-in-out infinite alternate;
+}
+
+.music .metronome {
+  opacity: 0;
+  transform: translateY(-0.5rem);
 }

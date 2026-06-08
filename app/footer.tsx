@@ -215,22 +215,13 @@ export function Footer() {
             playing ? "Pause" : `Play ${track.title} by ${track.artist}`
           }
         >
-          <span className={styles.glyphSwap} aria-hidden="true">
-            <span className={styles.note}>
-              <span className={styles.noteInner}>
-                ·<span className={styles.arc1}>)</span>
-                <span className={styles.arc2}>)</span>
-                <span className={styles.arc3}>)</span>
-              </span>
-            </span>
-            <span className={styles.bars} ref={barsRef}>
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-            </span>
+          <span className={styles.barsSlot} ref={barsRef} aria-hidden="true">
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
           </span>
           <span className={styles.swap}>
             <span className={styles.clockLine}>
@@ -250,6 +241,9 @@ export function Footer() {
             <span className={styles.trackLine}>
               {track.title} by {track.artist}
             </span>
+          </span>
+          <span className={styles.metronome} aria-hidden="true">
+            <span className={styles.pendulum} />
           </span>
         </button>
       </div>
