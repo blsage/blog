@@ -215,14 +215,6 @@ export function Footer() {
             playing ? "Pause" : `Play ${track.title} by ${track.artist}`
           }
         >
-          <span className={styles.barsSlot} ref={barsRef} aria-hidden="true">
-            <span />
-            <span />
-            <span />
-            <span />
-            <span />
-            <span />
-          </span>
           <span className={styles.swap}>
             <span className={styles.clockLine}>
               {clock && (
@@ -239,6 +231,18 @@ export function Footer() {
               )}
             </span>
             <span className={styles.trackLine}>
+              <span
+                className={styles.barsSlot}
+                ref={barsRef}
+                aria-hidden="true"
+              >
+                <span />
+                <span />
+                <span />
+                <span />
+                <span />
+                <span />
+              </span>
               {track.title} by {track.artist}
             </span>
           </span>
