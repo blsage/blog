@@ -3,6 +3,7 @@
 import NumberFlow from "@number-flow/react";
 import { Fragment, useEffect, useState } from "react";
 import { site } from "@/site.config";
+import { Listening } from "./listening";
 import styles from "./footer.module.css";
 
 interface Clock {
@@ -118,6 +119,7 @@ export function Footer() {
             ]
           </span>
         </div>
+        <Listening />
       </div>
     </footer>
   );

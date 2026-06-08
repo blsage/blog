@@ -1,0 +1,111 @@
+.listening {
+  min-height: 1.25rem;
+  margin-top: 0.625rem;
+}
+
+.toggle {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+.bars {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 1.5px;
+  height: 0.7rem;
+  flex-shrink: 0;
+}
+
+.bars span {
+  width: 2px;
+  border-radius: 1px;
+  background: var(--color-secondary);
+  height: 30%;
+  animation: barIdle 2.6s ease-in-out infinite;
+}
+
+.bars span:nth-child(2) {
+  height: 55%;
+  animation-delay: 0.4s;
+  animation-duration: 3.1s;
+}
+
+.bars span:nth-child(3) {
+  height: 40%;
+  animation-delay: 0.9s;
+  animation-duration: 2.3s;
+}
+
+.bars span:nth-child(4) {
+  height: 60%;
+  animation-delay: 1.3s;
+  animation-duration: 2.9s;
+}
+
+.playing span {
+  animation: barDance 0.55s ease-in-out infinite alternate;
+}
+
+.playing span:nth-child(2) {
+  animation-delay: 0.15s;
+  animation-duration: 0.42s;
+}
+
+.playing span:nth-child(3) {
+  animation-delay: 0.3s;
+  animation-duration: 0.6s;
+}
+
+.playing span:nth-child(4) {
+  animation-delay: 0.1s;
+  animation-duration: 0.48s;
+}
+
+.label {
+  color: var(--color-secondary);
+  font-size: 0.8125rem;
+  font-weight: 460;
+  letter-spacing: -0.0025rem;
+  line-height: 1.25rem;
+  transition: color 0.15s ease;
+}
+
+.track {
+  color: rgba(0, 0, 0, 0.55);
+  font-weight: 500;
+}
+
+.toggle:hover .label {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+@keyframes barIdle {
+  0%,
+  100% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(1.6);
+  }
+}
+
+@keyframes barDance {
+  0% {
+    transform: scaleY(0.5);
+  }
+  100% {
+    transform: scaleY(1.9);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bars span,
+  .playing span {
+    animation: none;
+  }
+}
