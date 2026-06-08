@@ -51,6 +51,7 @@ export function Footer() {
   const [trackIndex, setTrackIndex] = useState(0);
   const [playing, setPlaying] = useState(false);
   const [hover, setHover] = useState(false);
+  const [isTouch, setIsTouch] = useState(false);
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const audioContextRef = useRef<AudioContext | null>(null);
@@ -198,7 +199,7 @@ export function Footer() {
   };
 
   const track = PLAYLIST[trackIndex];
-  const musicMode = hover;
+  const musicMode = hover || (isTouch && playing);
 
   return (
     <footer className={styles.footer}>
@@ -207,8 +208,14 @@ export function Footer() {
           className={`${styles.row} ${clock ? styles.visible : styles.hidden} ${
             musicMode ? styles.music : ""
           }`}
-          onMouseEnter={() => setHover(true)}
-          onMouseLeave={() => setHover(false)}
+          onPointerEnter={(e) => {
+            if (e.pointerType === "touch") {
+              setIsTouch(true);
+            } else {
+              setHover(true);
+            }
+          }}
+          onPointerLeave={() => setHover(false)}
           onClick={toggle}
           aria-label={
             playing ? "Pause" : `Play ${track.title} by ${track.artist}`
