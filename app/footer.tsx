@@ -236,8 +236,10 @@ export function Footer() {
           </span>
           <span className={styles.glyphSwap} aria-hidden="true">
             <span className={styles.note}>
-              <span className={styles.noteA}>♪</span>
-              <span className={styles.noteB}>♫</span>
+              <span className={styles.noteInner}>
+                <span className={styles.noteA}>d[-_-]b</span>
+                <span className={styles.noteB}>d[•_•]b</span>
+              </span>
             </span>
             <span className={styles.bars} ref={barsRef}>
               <span />
