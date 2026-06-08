@@ -1,13 +1,13 @@
 .listening {
-  min-height: 1.25rem;
-  margin-top: 0.625rem;
+  display: inline-flex;
+  align-items: center;
+  min-width: 0.75rem;
 }
 
 .toggle {
   appearance: none;
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
   background: none;
   cursor: pointer;
   text-align: left;
@@ -72,16 +72,18 @@
   font-weight: 460;
   letter-spacing: -0.0025rem;
   line-height: 1.25rem;
-  transition: color 0.15s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 0;
+  opacity: 0;
+  transition: max-width 0.35s ease, opacity 0.3s ease, padding 0.35s ease;
 }
 
-.track {
-  color: rgba(0, 0, 0, 0.55);
-  font-weight: 500;
-}
-
-.toggle:hover .label {
-  color: rgba(0, 0, 0, 0.6);
+.toggle:hover .label,
+.active .label {
+  max-width: 18rem;
+  opacity: 1;
+  padding-left: 0.5rem;
 }
 
 @keyframes barIdle {

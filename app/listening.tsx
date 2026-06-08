@@ -59,14 +59,14 @@ export function Listening() {
     }
   };
 
-  if (index === null) return <div className={styles.listening} />;
+  if (index === null) return <span className={styles.listening} />;
 
   const track = PLAYLIST[index];
 
   return (
-    <div className={styles.listening}>
+    <span className={styles.listening}>
       <button
-        className={styles.toggle}
+        className={`${styles.toggle} ${playing ? styles.active : ""}`}
         onClick={toggle}
         aria-label={playing ? "Pause" : "Play a preview"}
       >
@@ -77,10 +77,9 @@ export function Listening() {
           <span />
         </span>
         <span className={styles.label}>
-          On rotation: <span className={styles.track}>{track.title}</span> —{" "}
-          {track.artist}
+          {track.title} — {track.artist}
         </span>
       </button>
-    </div>
+    </span>
   );
 }

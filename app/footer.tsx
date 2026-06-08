@@ -118,8 +118,8 @@ export function Footer() {
             ))}
             ]
           </span>
+          <Listening />
         </div>
-        <Listening />
       </div>
     </footer>
   );
