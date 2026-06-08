@@ -1,9 +1,8 @@
 "use client";
 
 import NumberFlow from "@number-flow/react";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import { site } from "@/site.config";
-import { Listening } from "./listening";
 import styles from "./footer.module.css";
 
 interface Clock {
@@ -41,40 +40,43 @@ export function Footer() {
     return () => clearInterval(interval);
   }, []);
 
+  const tickerRef = useRef<ReturnType<typeof setInterval> | undefined>(
+    undefined
+  );
+  const timeoutsRef = useRef<ReturnType<typeof setTimeout>[]>([]);
+
   useEffect(() => {
-    const rand = () => Math.floor(Math.random() * REEL_SYMBOLS.length);
-    let ticker: ReturnType<typeof setInterval>;
-    const timeouts: ReturnType<typeof setTimeout>[] = [];
-
-    const spin = () => {
-      setSlot((s) => ({ ...s, locked: 0 }));
-      ticker = setInterval(() => {
-        setSlot((s) =>
-          s.locked >= 3
-            ? s
-            : {
-                ...s,
-                reels: s.reels.map((v, i) => (i >= s.locked ? rand() : v)),
-              }
-        );
-      }, 70);
-      timeouts.push(
-        setTimeout(() => setSlot((s) => ({ ...s, locked: 1 })), 600),
-        setTimeout(() => setSlot((s) => ({ ...s, locked: 2 })), 1000),
-        setTimeout(() => {
-          setSlot((s) => ({ ...s, locked: 3 }));
-          clearInterval(ticker);
-        }, 1400)
-      );
-    };
-
-    const interval = setInterval(spin, 9000);
+    const ticker = tickerRef;
+    const timeouts = timeoutsRef;
     return () => {
-      clearInterval(interval);
-      clearInterval(ticker);
-      timeouts.forEach(clearTimeout);
+      clearInterval(ticker.current);
+      timeouts.current.forEach(clearTimeout);
     };
   }, []);
+
+  const spin = () => {
+    if (slot.locked < 3) return;
+    const rand = () => Math.floor(Math.random() * REEL_SYMBOLS.length);
+    setSlot((s) => ({ ...s, locked: 0 }));
+    tickerRef.current = setInterval(() => {
+      setSlot((s) =>
+        s.locked >= 3
+          ? s
+          : {
+              ...s,
+              reels: s.reels.map((v, i) => (i >= s.locked ? rand() : v)),
+            }
+      );
+    }, 70);
+    timeoutsRef.current.push(
+      setTimeout(() => setSlot((s) => ({ ...s, locked: 1 })), 600),
+      setTimeout(() => setSlot((s) => ({ ...s, locked: 2 })), 1000),
+      setTimeout(() => {
+        setSlot((s) => ({ ...s, locked: 3 }));
+        clearInterval(tickerRef.current);
+      }, 1400)
+    );
+  };
 
   const jackpot =
     slot.locked === 3 && slot.reels.every((r) => r === slot.reels[0]);
@@ -99,9 +101,10 @@ export function Footer() {
               </>
             )}
           </p>
-          <span
+          <button
             className={`${styles.slot} ${jackpot ? styles.jackpot : ""}`}
-            aria-hidden="true"
+            onClick={spin}
+            aria-label="Spin the slot machine"
           >
             [
             {slot.reels.map((r, i) => (
@@ -117,8 +120,7 @@ export function Footer() {
               </Fragment>
             ))}
             ]
-          </span>
-          <Listening />
+          </button>
         </div>
       </div>
     </footer>

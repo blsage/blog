@@ -41,6 +41,9 @@
 }
 
 .slot {
+  appearance: none;
+  background: none;
+  cursor: pointer;
   flex-shrink: 0;
   display: inline-flex;
   align-items: center;
