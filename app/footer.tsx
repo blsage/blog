@@ -64,7 +64,12 @@ export function Footer() {
   const fallbackTargetsRef = useRef<number[]>(Array(BAR_COUNT).fill(BAR_MIN));
 
   useEffect(() => {
-    setTrackIndex(Math.floor(Math.random() * PLAYLIST.length));
+    const saved = Number(localStorage.getItem("currentSongIndex"));
+    const next = Number.isNaN(saved)
+      ? 0
+      : (saved + 1) % PLAYLIST.length;
+    setTrackIndex(next);
+    localStorage.setItem("currentSongIndex", String(next));
     const update = () => setClock(clockIn(site.location.timeZone));
     update();
     const interval = setInterval(update, 1000);
@@ -165,6 +170,7 @@ export function Footer() {
       audio.onended = () => {
         const next = (i + 1) % PLAYLIST.length;
         setTrackIndex(next);
+        localStorage.setItem("currentSongIndex", String(next));
         play(next);
       };
       ensureAnalyser();
