@@ -38,14 +38,14 @@
 }
 
 .swap {
-  display: grid;
+  position: relative;
+  display: inline-flex;
   align-items: center;
   height: 100%;
   pointer-events: none;
 }
 
 .swap > span {
-  grid-area: 1 / 1;
   display: inline-flex;
   align-items: center;
   height: 1.25rem;
@@ -70,6 +70,10 @@
 }
 
 .trackLine {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  margin-top: -0.625rem;
   opacity: 0;
   transform: translateY(0.5rem);
 }
