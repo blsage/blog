@@ -1,0 +1,47 @@
+name: Sync core to taylor-made
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: sync-template
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out blog (source of truth)
+        uses: actions/checkout@v4
+        with:
+          path: blog
+
+      - name: Check out taylor-made (public template)
+        uses: actions/checkout@v4
+        with:
+          repository: blsage/taylor-made
+          path: taylor-made
+          token: ${{ secrets.TEMPLATE_PUSH_TOKEN }}
+
+      - name: Copy core, preserving the template's personal files
+        run: |
+          rsync -a --delete \
+            --filter='protect /.git' \
+            --exclude-from=blog/.template-sync-ignore \
+            blog/ taylor-made/
+
+      - name: Commit and push if the core changed
+        working-directory: taylor-made
+        run: |
+          git config user.name "taylor-made sync"
+          git config user.email "sync@users.noreply.github.com"
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "Template already up to date."
+            exit 0
+          fi
+          SHORT_SHA=$(cd ../blog && git rev-parse --short HEAD)
+          git add -A
+          git commit -m "Sync core from blog@${SHORT_SHA}"
+          git push
