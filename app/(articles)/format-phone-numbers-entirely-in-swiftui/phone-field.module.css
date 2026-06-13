@@ -1,0 +1,53 @@
+.figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.625rem;
+  margin: 2rem auto;
+}
+
+.field {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  max-width: 18rem;
+  padding: 0.75rem 1rem;
+  background: #fff;
+  border-radius: 0.75rem;
+  box-shadow: inset 0 0 0 1px var(--color-hairline-strong),
+    0 1px 2px rgba(0, 0, 0, 0.04);
+  transition: box-shadow 0.2s ease;
+}
+
+.field:focus-within {
+  box-shadow: inset 0 0 0 1.5px rgb(255, 0, 170),
+    0 2px 12px rgba(255, 0, 170, 0.12);
+}
+
+.flag {
+  font-size: 1.15rem;
+  line-height: 1;
+}
+
+.input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  font-family: var(--font-code);
+  font-size: 1rem;
+  letter-spacing: 0.01em;
+  color: var(--color-text);
+}
+
+.input::placeholder {
+  color: rgba(0, 0, 0, 0.28);
+}
+
+.caption {
+  color: #7c7b74;
+  font-size: 0.75rem;
+  font-weight: 460;
+}

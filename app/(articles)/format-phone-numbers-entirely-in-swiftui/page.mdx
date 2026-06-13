@@ -1,3 +1,7 @@
+import { Highlight } from "@/app/components/highlight";
+import { MarginNote } from "@/app/components/margin-note";
+import { PhoneField } from "./phone-field";
+
 export const metadata = {
   title: "Format phone numbers entirely in SwiftUI",
   description:
@@ -12,7 +16,11 @@ In UIKit you could hack it together. In SwiftUI, in 2020, it went from very hard
 
 > Apple has this exact code — every iOS keyboard formats phone numbers. They’ve just never made it public.
 
-So we built [iPhoneNumberField](https://github.com/MojtabaHs/iPhoneNumberField): real-time phone number formatting, entirely in SwiftUI.
+So we built [iPhoneNumberField](https://github.com/MojtabaHs/iPhoneNumberField): real-time phone number formatting, <Highlight color="pink">entirely in SwiftUI</Highlight>.
+
+<PhoneField />
+
+That’s the idea, in your browser. On iOS it does the same thing — on every keystroke, cursor always landing in the right place:
 
 ![iPhoneNumberField formatting a number as it’s typed](/format-phone-numbers/typing.gif "Formatting on every keystroke, cursor always in the right place.")
 
@@ -57,7 +65,9 @@ iPhoneNumberField("Phone", text: $text)
 
 ## Focus
 
+<MarginNote note="Apple added @FocusState in iOS 15, a year later">
 A phone field usually lives on a screen with other fields, and in 2020 SwiftUI had no way to move focus between them programmatically. The field ships with an `isEditing` binding so the keyboard goes where your code says, not just where the user taps:
+</MarginNote>
 
 ```swift
 @State var text = ""
