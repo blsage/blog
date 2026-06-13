@@ -76,12 +76,12 @@ export function Footer() {
   const fallbackTargetsRef = useRef<number[]>(Array(BAR_COUNT).fill(BAR_MIN));
 
   useEffect(() => {
-    const saved = Number(localStorage.getItem("currentSongIndex"));
-    const next = Number.isNaN(saved)
-      ? 0
-      : (saved + 1) % PLAYLIST.length;
-    setTrackIndex(next);
-    localStorage.setItem("currentSongIndex", String(next));
+    if (PLAYLIST.length > 0) {
+      const saved = Number(localStorage.getItem("currentSongIndex"));
+      const next = Number.isNaN(saved) ? 0 : (saved + 1) % PLAYLIST.length;
+      setTrackIndex(next);
+      localStorage.setItem("currentSongIndex", String(next));
+    }
     const update = () => setClock(clockIn(site.location.timeZone));
     update();
     const interval = setInterval(update, 1000);
@@ -220,6 +220,7 @@ export function Footer() {
   };
 
   const toggle = () => {
+    if (PLAYLIST.length === 0) return;
     if (playing) {
       audioRef.current?.pause();
       playingRef.current = false;
@@ -249,8 +250,9 @@ export function Footer() {
     }
   };
 
-  const track = PLAYLIST[trackIndex];
-  const musicMode = hover || (isTouch && playing);
+  const track = PLAYLIST[trackIndex] ?? null;
+  const hasMusic = track !== null;
+  const musicMode = hasMusic && (hover || (isTouch && playing));
   const pluggedIn =
     !playing && clock !== null && (clock.hour24 >= 22 || clock.hour24 < 8);
 
@@ -275,7 +277,11 @@ export function Footer() {
           onPointerLeave={() => setHover(false)}
           onClick={toggle}
           aria-label={
-            playing ? "Pause" : `Play ${track.title} by ${track.artist}`
+            !hasMusic
+              ? "Local time"
+              : playing
+              ? "Pause"
+              : `Play ${track.title} by ${track.artist}`
           }
         >
           <span className={styles.swap}>
@@ -305,7 +311,7 @@ export function Footer() {
                 <span />
                 <span />
               </span>
-              {track.title} by {track.artist}
+              {track && `${track.title} by ${track.artist}`}
             </span>
           </span>
           <span className={styles.player} aria-hidden="true">
