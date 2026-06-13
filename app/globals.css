@@ -609,6 +609,7 @@ figure[data-rehype-pretty-code-figure] pre code > [data-line]::before {
 
 .article .img-figure {
   display: block;
+  max-width: 28rem;
   margin: 2rem auto;
 }
 

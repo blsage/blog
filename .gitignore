@@ -8,3 +8,4 @@ out/
 next-env.d.ts
 launch-video/
 .vercel
+.env*.local

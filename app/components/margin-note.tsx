@@ -17,32 +17,52 @@ export function MarginNote({
     const target = targetRef.current;
     if (!target) return;
 
-    const narrow = window.matchMedia("(max-width: 1080px)").matches;
+    const query = window.matchMedia("(max-width: 1080px)");
+    let annotation: ReturnType<typeof annotate> | null = null;
+    let observer: IntersectionObserver | null = null;
+    let shown = false;
 
-    const annotation = annotate(target, {
-      type: "bracket",
-      brackets: narrow ? ["bottom"] : ["right"],
-      color: "#1a1a1a",
-      strokeWidth: 2,
-      padding: narrow ? [4, 2, 10, 2] : [4, 7, 4, 0],
-      iterations: 1,
-      animationDuration: 700,
-    });
+    const build = () => {
+      annotation?.remove();
+      observer?.disconnect();
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
-          annotation.show();
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.7 }
-    );
-    observer.observe(target);
+      const narrow = query.matches;
+      annotation = annotate(target, {
+        type: "bracket",
+        brackets: narrow ? ["bottom"] : ["right"],
+        color: "#1a1a1a",
+        strokeWidth: 2,
+        padding: narrow ? [4, 2, 10, 2] : [4, 7, 4, 0],
+        iterations: 1,
+        animate: !shown,
+        animationDuration: 700,
+      });
+
+      if (shown) {
+        annotation.show();
+        return;
+      }
+
+      observer = new IntersectionObserver(
+        (entries) => {
+          if (entries[0].isIntersecting) {
+            shown = true;
+            annotation?.show();
+            observer?.disconnect();
+          }
+        },
+        { threshold: 0.7 }
+      );
+      observer.observe(target);
+    };
+
+    build();
+    query.addEventListener("change", build);
 
     return () => {
-      observer.disconnect();
-      annotation.remove();
+      query.removeEventListener("change", build);
+      observer?.disconnect();
+      annotation?.remove();
     };
   }, []);
 

@@ -2,6 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import { getPosts, formatArticleDate } from "@/app/get-posts";
+import { ArticleJsonLd } from "@/app/json-ld";
 
 export function ArticleHeader() {
   const pathname = usePathname();
@@ -12,6 +13,7 @@ export function ArticleHeader() {
 
   return (
     <header>
+      <ArticleJsonLd post={post} />
       <h1>{post.title}</h1>
       <time dateTime={post.date}>{formatArticleDate(post.date)}</time>
     </header>

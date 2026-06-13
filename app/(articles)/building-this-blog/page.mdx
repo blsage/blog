@@ -10,18 +10,18 @@ export const metadata = {
 };
 
 <MarginNote note="and here we are">
-  <p>I didn’t plan to start a blog. I saw a couple of personal sites I liked, wanted my own, and figured building it might get me to write.</p>
+  <p>I don’t really need a blog. I’m not sure anyone does.[^need] People don’t even finish YouTube videos anymore. But if I was going to have one, I wanted it to look nice — and since I’m an engineer, I wanted anyone to be able to fork it for themselves.</p>
 </MarginNote>
 
 ## Where the idea came from
 
-Two sites shaped this one.
+This site is based on two others.
 
-The look comes from [Benji Taylor’s site](https://benji.org). His pages are quiet in a way most personal sites aren’t: one narrow column, small type, dates tucked into the margins, and interactive demos that sit inline with the prose like they were always part of the paragraph. The first time I read one of his posts I scrolled back up just to look at it again.
+The design is from [Benji Taylor’s site](https://benji.org). I don’t really know anything about design, and he knows everything. And I couldn’t afford a designer,[^cpi] but I certainly can follow a spec.
 
-The architecture comes from [Guillermo Rauch’s blog](https://github.com/rauchg/blog). His insight is that a blog doesn’t need a content layer at all: every post is just an MDX file that *is* its own route, plus one line in a JSON registry that drives the index. No CMS, no database, no frontmatter parser. The framework already knows how to render pages, so let posts be pages.
+The architecture comes from [Guillermo Rauch’s blog](https://github.com/rauchg/blog). Everything about how this is set up comes from his blog: the open source GitHub repo, the MDX files that are their own routes, and the one line in a JSON registry driving the index. No CMS, no database, no frontmatter parser.
 
-This site is the marriage of the two: <Highlight>Benji’s aesthetic on Guillermo’s skeleton</Highlight>.
+So the site is a combo of the two: <Highlight>Benji’s aesthetic on Guillermo’s skeleton</Highlight>.
 
 ## How it works
 
@@ -38,7 +38,7 @@ imported one line up and dropped straight into the prose:
 <Counter />
 ```
 
-A single `posts.json` registry holds each post’s slug, title, and date; the homepage index and the shared article layout both read from it, so a post never repeats its own metadata. Code is highlighted at build time with [rehype-pretty-code](https://rehype-pretty.pages.dev), every element a post might reach for is already styled, and the whole thing prerenders to static HTML.
+A single `posts.json` registry holds each post’s slug, title, and date; the homepage index and the shared article layout both read from it, so the index and the page header can never drift out of sync. Code is highlighted at build time with [rehype-pretty-code](https://rehype-pretty.pages.dev), every element a post might reach for is already styled, and the whole thing prerenders to static HTML.
 
 ## Posts that do things
 
@@ -49,24 +49,21 @@ Because a post is a real React route, the component it imports is really running
   <figcaption>A Framer Motion counter, imported at the top of this very file.</figcaption>
 </figure>
 
-That’s the part I care about most.[^1] A post about a gesture can contain the gesture. A post about an animation can play it. The writing surface is the whole of the web, not a subset a CMS decided to allow.
+That’s the key.[^counter] A post about a gesture can contain the gesture. A post about an animation can play it. No CMS decides which slice of the web I’m allowed to use. The whole thing is my escape hatch.
 
 ## The fun parts
 
-A few of the flourishes are worth opening up, since they’re what make a page feel handmade instead of generated.
+I tried to get as many of the details right from Benji’s site, because they’re what make it feel nice.
 
-The margin notes are set in my actual handwriting. I turned my own letters into a font, named with no imagination “Bens Font 3,” which tells you how many tries it took, and loaded it with `next/font`. So when a note leans out into the margin, that’s my hand, not a typeface doing an impression of one.
+For instance, the margin notes are my actual handwriting. I used [Calligraphr](https://www.calligraphr.com) to make a custom font from a photo in my notebook, and loaded it in with `next/font`.
+
+![A spiral notebook page filled with a grid of hand-drawn letters, one glyph per cell](/building-this-blog/handwriting.jpg "How I created my own font for the margin notes.")
 
 The bracket that pulls each note to the side is drawn with [rough.js](https://roughjs.com), by way of [rough-notation](https://github.com/rough-stuff/rough-notation). Instead of a clean SVG stroke it sketches a slightly wobbly line, redrawn a little differently each time, then animates it in when the note scrolls into view. The hand-drawn underlines and circles elsewhere on the site work the same way.
 
-The <Highlight>highlighter</Highlight> isn’t a flat swatch of color. It’s a gradient that runs strong through the middle and thins toward the edges, with the padding, tilt, and opacity all nudged by a seed taken from the text itself. Every stroke pools where a real marker would, and yet it stays deterministic: the same words always get the same swipe, so nothing flickers between renders.
+To get a nice <Highlight>highlighter</Highlight> effect, I combine several randomized gradients, padding, and tilts, all seeded by the text itself. So it pools naturally, and never changes between renders.
 
-And the <Gradient>letter-by-letter gradient</Gradient> is exactly that. The text is split into characters, and each one is painted its own color, interpolated from the first letter to the last.
-
-<div className="notation">
-  <p>A blog you own, in files you can read.</p>
-  <span className="note">the whole point</span>
-</div>
+And lastly, there’s a <Gradient>letter-by-letter gradient</Gradient> that interpolates between any two colors I choose.
 
 ## Make it yours
 
@@ -87,13 +84,17 @@ And you don’t have to touch them by hand. Clone the repo, open it in Claude Co
 Clone https://github.com/blsage/taylor-made and make it mine: put my name and city in site.config.ts, rewrite app/bio.mdx about me, empty app/posts.json, and start my first post at app/(articles)/hello/page.mdx.
 </aside>
 
-That isn’t hypothetical: paste it in, and a minute later you’re holding your own copy of this site, named after you and ready to write in.
+Paste that in and you’re ready to rock.
 
 <a className="cta" href="https://github.com/blsage/taylor-made" target="_blank" rel="noopener noreferrer">
   taylor-made is on GitHub. <span>Use the template.</span>
 </a>
 
-[^1]: The counter above is an ordinary client component co-located in this post’s folder. No plugin system, no shortcodes. It animates with [Framer Motion](https://www.framer.com/motion/).
+[^need]: Except maybe Sam Altman and Paul Graham.
+
+[^cpi]: The Consumer Price Index is up about a fifth since 2020. Designer rates, in my experience, did not stop there.
+
+[^counter]: The counter above is an ordinary client component co-located in this post’s folder. No plugin system, no shortcodes. It animates with [Framer Motion](https://www.framer.com/motion/).
 
 <footer>
 # Acknowledgements

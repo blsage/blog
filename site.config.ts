@@ -5,6 +5,13 @@ export const site = {
   email: "ben@sage.me",
   updated: "2026-06-06",
   listTitle: "Writing",
+  jobTitle: "iOS Developer",
+  twitter: "@benlsage",
+  sameAs: [
+    "https://x.com/benlsage",
+    "https://instagram.com/bensage",
+    "https://github.com/blsage",
+  ],
   location: {
     city: "San Francisco",
     region: "California",
