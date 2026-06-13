@@ -224,6 +224,26 @@ export function Footer() {
       audioRef.current?.pause();
       playingRef.current = false;
       setPlaying(false);
+      return;
+    }
+    const audio = audioRef.current;
+    const url = `/playlist/${PLAYLIST[trackIndex].file}`;
+    if (audio && audio.src.endsWith(url) && !audio.ended) {
+      ensureAnalyser();
+      audioContextRef.current?.resume();
+      audio
+        .play()
+        .then(() => {
+          silentFramesRef.current = 0;
+          playingRef.current = true;
+          setPlaying(true);
+          cancelAnimationFrame(rafRef.current);
+          rafRef.current = requestAnimationFrame(draw);
+        })
+        .catch(() => {
+          playingRef.current = false;
+          setPlaying(false);
+        });
     } else {
       play(trackIndex);
     }

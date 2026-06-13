@@ -34,9 +34,10 @@ function CustomImage({
   ...props
 }: React.ImgHTMLAttributes<HTMLImageElement>) {
   const frameless = typeof src === "string" && src.includes("#frameless");
+  const phone = typeof src === "string" && src.includes("#phone");
   const cleanSrc = typeof src === "string" ? src.split("#")[0] : src;
   return (
-    <span className="img-figure">
+    <span className={`img-figure${phone ? " img-phone" : ""}`}>
       {frameless ? (
         <img
           className="img-bare"

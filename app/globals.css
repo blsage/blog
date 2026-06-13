@@ -339,6 +339,13 @@ a {
   color: var(--color-secondary);
 }
 
+.article a.cta > svg,
+.article a.cta > img {
+  width: 1.125rem;
+  height: 1.125rem;
+  flex-shrink: 0;
+}
+
 .article a.cta::after {
   content: "";
   margin-left: auto;
@@ -636,6 +643,10 @@ figure[data-rehype-pretty-code-figure] pre code > [data-line]::before {
   height: auto;
   margin: 0 auto;
   border-radius: 0;
+}
+
+.article .img-phone {
+  max-width: 16rem;
 }
 
 .article figure:not([data-rehype-pretty-code-figure]) {

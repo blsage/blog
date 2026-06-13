@@ -9,7 +9,7 @@ export const metadata = {
     "Why I built my own blog, where the idea came from, and how it works.",
 };
 
-I’ve wanted a place to write for a while. Not a Substack, not a Medium account — a small corner of the internet that I actually own, where a post can be anything a web page can be.
+I’ve wanted a place to write for a while. Not a Substack, not a Medium account: a small corner of the internet that I actually own, where a post can be anything a web page can be.
 
 <MarginNote note="still true">
   <p>The bar for shipping it was low on purpose: if publishing a post takes more than writing markdown and pushing to git, I’ll never do it. So the whole system had to disappear behind the writing.</p>
@@ -19,15 +19,15 @@ I’ve wanted a place to write for a while. Not a Substack, not a Medium account
 
 Two sites shaped this one.
 
-The look comes from [Benji Taylor’s site](https://benji.org). His pages are quiet in a way most personal sites aren’t — one narrow column, small type, dates tucked into the margins, and interactive demos that sit inline with the prose like they were always part of the paragraph. The first time I read one of his posts I scrolled back up just to look at it again.
+The look comes from [Benji Taylor’s site](https://benji.org). His pages are quiet in a way most personal sites aren’t: one narrow column, small type, dates tucked into the margins, and interactive demos that sit inline with the prose like they were always part of the paragraph. The first time I read one of his posts I scrolled back up just to look at it again.
 
-The architecture comes from [Guillermo Rauch’s blog](https://github.com/rauchg/blog). His insight is that a blog doesn’t need a content layer at all: every post is just an MDX file that *is* its own route, plus one line in a JSON registry that drives the index. No CMS, no database, no frontmatter parser — the framework already knows how to render pages, so let posts be pages.
+The architecture comes from [Guillermo Rauch’s blog](https://github.com/rauchg/blog). His insight is that a blog doesn’t need a content layer at all: every post is just an MDX file that *is* its own route, plus one line in a JSON registry that drives the index. No CMS, no database, no frontmatter parser. The framework already knows how to render pages, so let posts be pages.
 
 This site is the marriage of the two: <Highlight>Benji’s aesthetic on Guillermo’s skeleton</Highlight>.
 
 ## How it works
 
-Each post lives at `app/(articles)/<slug>/page.mdx` and ships at the root path — this one is just `/building-this-blog`. The homepage index is driven by a hand-maintained registry:
+Each post lives at `app/(articles)/<slug>/page.mdx` and ships at the root path (this one is just `/building-this-blog`). The homepage index is driven by a hand-maintained registry:
 
 ```ts title="app/get-posts.ts"
 export function getPosts(): Post[] {
@@ -52,6 +52,8 @@ That’s the part I care about most.[^1] A post about a gesture can contain the 
 
 Everything a post might need is styled and ready, in plain markdown or plain HTML. *Emphasis* sets in Newsreader italic, **strong** stays Inter, and inline `code` gets a quiet tint. Text can be <mark>marked</mark> like a highlighter, or run over with <Highlight>blue</Highlight> or <Highlight color="pink">pink</Highlight> ink that pools at the edges of the stroke. UI labels like <kbd>Continue</kbd> wear capsule outlines, and feature names can run through a <Gradient>letter-by-letter gradient</Gradient>.
 
+None of it is special syntax. Markdown compiles to ordinary HTML, and each tag is styled exactly once: `*word*` becomes an `<em>`, `> line` a `<blockquote>`, a `#` heading an `<h2>`, and `[^1]` a small `<sup>` linked to a list at the foot of the page. The stylesheet quietly handles the rest (`<kbd>`, `<dl>`, `<hr>`, `<mark>`, `<figure>`), so the thing you actually write stays plain markdown and still arrives looking composed.
+
 > Blockquotes speak in an italic voice, with a hairline bar to the left.
 
 Pull quotes sit centered and quiet, and can carry a handwritten note in the margin:
@@ -61,28 +63,22 @@ Pull quotes sit centered and quiet, and can carry a handwritten note in the marg
   <span className="note">the whole point</span>
 </div>
 
-Dividers come in a few weights — plain, dashed, or the three dots below:
+Dividers come in a few weights (plain, dashed, or the three dots below):
 
 <hr data-variant="dots" />
 
 - Unordered lists hang small dot bullets in the margin
 - Ordered lists do the same with their numbers
 
-Section headings get hairline leaders and feed the index tree on the left. Footnotes[^2] collect at the bottom under a short rule. Definition lists draw leader lines between terms and descriptions — there’s one in the next section. Images come rounded, dividers are hairlines, and an acknowledgements `footer` closes a post in small gray type, like the one below.
+Section headings get hairline leaders and feed the index tree on the left. Footnotes[^2] collect at the bottom under a short rule. Definition lists draw leader lines between terms and descriptions. There’s one in the next section. Images come rounded, dividers are hairlines, and an acknowledgements `footer` closes a post in small gray type, like the one below.
 
-Videos drop into a framed card that loops silently, with a 1x/0.5x speed toggle in the corner. And there’s a prompt box, for quoting what you actually told the model:
-
-<aside className="prompt" data-label="Try it">
-Clone https://github.com/blsage/blog and make it mine: put my name and city in site.config.ts, rewrite app/bio.mdx about me, empty app/posts.json, and start my first post at app/(articles)/hello/page.mdx.
-</aside>
-
-That one isn’t hypothetical — paste it into Claude Code and you’ll be holding your own copy of this site.
+Videos drop into a framed card that loops silently, with a 1x/0.5x speed toggle in the corner. And there’s a prompt box for quoting exactly what you told a model, which earns a section of its own below.
 
 [^2]: Like this one. Click it to jump back.
 
 ## Make it yours
 
-The whole thing is a reusable template: [taylor-made](https://github.com/blsage/blog). Everything personal lives in three files:
+This whole site is a reusable template, [taylor-made](https://github.com/blsage/blog). Everything personal lives in just three files:
 
 <dl>
   <dt>site.config.ts</dt>
@@ -93,16 +89,22 @@ The whole thing is a reusable template: [taylor-made](https://github.com/blsage/
   <dd>The post registry</dd>
 </dl>
 
-Swap those, add posts, and it’s yours.
+And you don’t have to touch them by hand. Clone the repo, open it in Claude Code, and paste this:
+
+<aside className="prompt" data-label="Try it">
+Clone https://github.com/blsage/blog and make it mine: put my name and city in site.config.ts, rewrite app/bio.mdx about me, empty app/posts.json, and start my first post at app/(articles)/hello/page.mdx.
+</aside>
+
+That isn’t hypothetical: paste it in, and a minute later you’re holding your own copy of this site, named after you and ready to write in.
 
 <a className="cta" href="https://github.com/blsage/blog" target="_blank" rel="noopener noreferrer">
   taylor-made is on GitHub. <span>Use the template.</span>
 </a>
 
-[^1]: The counter above is an ordinary client component co-located in this post’s folder — no plugin system, no shortcodes. It animates with [Framer Motion](https://www.framer.com/motion/).
+[^1]: The counter above is an ordinary client component co-located in this post’s folder. No plugin system, no shortcodes. It animates with [Framer Motion](https://www.framer.com/motion/).
 
 <footer>
 # Acknowledgements
 
-The design of this site is closely modeled on [Benji Taylor’s](https://benji.org), and the architecture on [Guillermo Rauch’s blog](https://github.com/rauchg/blog). Thanks to both for working in the open.
+The design of this site is closely modeled on [Benji Taylor’s](https://benji.org), and the architecture on [Guillermo Rauch’s blog](https://github.com/rauchg/blog). Thanks to both for working in the open. This post was written and edited with [Claude](https://claude.com/claude-code).
 </footer>
