@@ -11,19 +11,27 @@ export function NewBadge() {
     const badge = badgeRef.current;
     if (!badge) return;
 
-    const annotation = annotate(badge, {
-      type: "circle",
+    const base = {
+      type: "circle" as const,
       color: "rgb(255, 0, 170)",
       strokeWidth: 1.5,
-      padding: [3, 7],
+      padding: [3, 7] as [number, number],
+    };
+
+    const first = annotate(badge, { ...base, iterations: 1, animate: false });
+    first.show();
+
+    const second = annotate(badge, {
+      ...base,
       iterations: 1,
       animationDuration: 600,
     });
-    const timer = setTimeout(() => annotation.show(), 900);
+    const timer = setTimeout(() => second.show(), 700);
 
     return () => {
       clearTimeout(timer);
-      annotation.remove();
+      first.remove();
+      second.remove();
     };
   }, []);
 

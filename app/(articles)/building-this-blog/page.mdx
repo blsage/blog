@@ -27,54 +27,31 @@ This site is the marriage of the two: <Highlight>Benji’s aesthetic on Guillerm
 
 ## How it works
 
-Each post lives at `app/(articles)/<slug>/page.mdx` and ships at the root path (this one is just `/building-this-blog`). The homepage index is driven by a hand-maintained registry:
+Each post lives at `app/(articles)/<slug>/page.mdx` and ships at the root path (this one is just `/building-this-blog`). There’s no CMS and no frontmatter parser, because a post is a file and the file *is* the route:
 
-```ts title="app/get-posts.ts"
-export function getPosts(): Post[] {
-  return [...postsData.posts].sort((a, b) => b.date.localeCompare(a.date));
-}
+```mdx title="app/(articles)/hello/page.mdx"
+import { Counter } from "./counter";
+
+export const metadata = { title: "Hello" };
+
+This is a whole post. The button below is a React component,
+imported one line up and dropped straight into the prose:
+
+<Counter />
 ```
 
-Code blocks are highlighted at build time with [rehype-pretty-code](https://rehype-pretty.pages.dev), and the shared article layout reads the title and date for the current slug from the registry, so posts never repeat their own metadata. Everything prerenders to static HTML.
+A single `posts.json` registry holds each post’s slug, title, and date; the homepage index and the shared article layout both read from it, so a post never repeats its own metadata. Code is highlighted at build time with [rehype-pretty-code](https://rehype-pretty.pages.dev), every element a post might reach for is already styled, and the whole thing prerenders to static HTML.
 
-## Interactive posts
+## Posts that do things
 
-Because posts are real React routes, they can import client components inline. Here’s one, animated with Framer Motion:
+Because a post is a real React route, the component it imports is really running. Here’s the one from the file above, live:
 
 <figure>
   <Counter />
-  <figcaption>A Framer Motion counter, imported two lines above this sentence.</figcaption>
+  <figcaption>A Framer Motion counter, imported at the top of this very file.</figcaption>
 </figure>
 
-That’s the part I care about most.[^1] A post about a gesture can contain the gesture. A post about an animation can play it.
-
-## The elements
-
-Everything a post might need is styled and ready, in plain markdown or plain HTML. *Emphasis* sets in Newsreader italic, **strong** stays Inter, and inline `code` gets a quiet tint. Text can be <mark>marked</mark> like a highlighter, or run over with <Highlight>blue</Highlight> or <Highlight color="pink">pink</Highlight> ink that pools at the edges of the stroke. UI labels like <kbd>Continue</kbd> wear capsule outlines, and feature names can run through a <Gradient>letter-by-letter gradient</Gradient>.
-
-None of it is special syntax. Markdown compiles to ordinary HTML, and each tag is styled exactly once: `*word*` becomes an `<em>`, `> line` a `<blockquote>`, a `#` heading an `<h2>`, and `[^1]` a small `<sup>` linked to a list at the foot of the page. The stylesheet quietly handles the rest (`<kbd>`, `<dl>`, `<hr>`, `<mark>`, `<figure>`), so the thing you actually write stays plain markdown and still arrives looking composed.
-
-> Blockquotes speak in an italic voice, with a hairline bar to the left.
-
-Pull quotes sit centered and quiet, and can carry a handwritten note in the margin:
-
-<div className="notation">
-  <p>A blog you own, in files you can read.</p>
-  <span className="note">the whole point</span>
-</div>
-
-Dividers come in a few weights (plain, dashed, or the three dots below):
-
-<hr data-variant="dots" />
-
-- Unordered lists hang small dot bullets in the margin
-- Ordered lists do the same with their numbers
-
-Section headings get hairline leaders and feed the index tree on the left. Footnotes[^2] collect at the bottom under a short rule. Definition lists draw leader lines between terms and descriptions. There’s one in the next section. Images come rounded, dividers are hairlines, and an acknowledgements `footer` closes a post in small gray type, like the one below.
-
-Videos drop into a framed card that loops silently, with a 1x/0.5x speed toggle in the corner. And there’s a prompt box for quoting exactly what you told a model, which earns a section of its own below.
-
-[^2]: Like this one. Click it to jump back.
+That’s the part I care about most.[^1] A post about a gesture can contain the gesture. A post about an animation can play it. The writing surface is the whole of the web, not a subset a CMS decided to allow.
 
 ## The fun parts
 
@@ -87,6 +64,11 @@ The bracket that pulls each note to the side is drawn with [rough.js](https://ro
 The <Highlight>highlighter</Highlight> isn’t a flat swatch of color. It’s a gradient that runs strong through the middle and thins toward the edges, with the padding, tilt, and opacity all nudged by a seed taken from the text itself. Every stroke pools where a real marker would, and yet it stays deterministic: the same words always get the same swipe, so nothing flickers between renders.
 
 And the <Gradient>letter-by-letter gradient</Gradient> is exactly that. The text is split into characters, and each one is painted its own color, interpolated from the first letter to the last.
+
+<div className="notation">
+  <p>A blog you own, in files you can read.</p>
+  <span className="note">the whole point</span>
+</div>
 
 ## Make it yours
 

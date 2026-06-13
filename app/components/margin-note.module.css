@@ -17,12 +17,6 @@
   font-size: 1.75rem;
   font-weight: 400;
   line-height: 95%;
-  opacity: 0;
-  transition: opacity 0.5s ease 0.45s;
-}
-
-.visible {
-  opacity: 1;
 }
 
 @media screen and (max-width: 1080px) {
