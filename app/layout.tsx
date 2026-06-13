@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Newsreader } from "next/font/google";
 import localFont from "next/font/local";
 import { site } from "@/site.config";
+import { Footer } from "./footer";
 import "./globals.css";
 
 const inter = Inter({
@@ -44,7 +45,10 @@ export default function RootLayout({
     >
       <body>
         <div className="top-fade" aria-hidden="true" />
-        <div className="container">{children}</div>
+        <div className="container">
+          {children}
+          <Footer />
+        </div>
       </body>
     </html>
   );

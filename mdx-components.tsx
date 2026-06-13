@@ -30,13 +30,33 @@ function CustomLink({
 function CustomImage({
   title,
   alt,
+  src = "",
   ...props
 }: React.ImgHTMLAttributes<HTMLImageElement>) {
+  const frameless = typeof src === "string" && src.includes("#frameless");
+  const cleanSrc = typeof src === "string" ? src.split("#")[0] : src;
   return (
     <span className="img-figure">
-      <span className="img-frame">
-        <img loading="lazy" decoding="async" alt={alt} {...props} />
-      </span>
+      {frameless ? (
+        <img
+          className="img-bare"
+          loading="lazy"
+          decoding="async"
+          alt={alt}
+          src={cleanSrc}
+          {...props}
+        />
+      ) : (
+        <span className="img-frame">
+          <img
+            loading="lazy"
+            decoding="async"
+            alt={alt}
+            src={cleanSrc}
+            {...props}
+          />
+        </span>
+      )}
       {title && <span className="caption">{title}</span>}
     </span>
   );

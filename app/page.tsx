@@ -1,6 +1,5 @@
 import { site } from "@/site.config";
 import Bio from "./bio.mdx";
-import { Footer } from "./footer";
 import { PostList } from "./post-list";
 import { getPosts, formatShortDate } from "./get-posts";
 
@@ -15,7 +14,6 @@ export default function Home() {
         <Bio />
       </article>
       <PostList posts={getPosts()} />
-      <Footer />
     </div>
   );
 }

@@ -4,6 +4,8 @@ export const metadata = {
     "Real-time phone number formatting is harder than it looks. iPhoneNumberField makes it one line of SwiftUI.",
 };
 
+![iPhoneNumberField on an iPhone, showing a formatted US phone number with a flag](/format-phone-numbers/phone.png#frameless)
+
 Formatting a phone number sounds like an afternoon of work. It isn’t. Formatting one in real time — as someone types — means carrying formatting data for every country (and they’re nearly all different), reformatting on every keystroke, and moving the cursor programmatically so it lands in the right place as spaces, dashes, and parentheses appear around it. Then making all of that survive deletion, not just typing.
 
 In UIKit you could hack it together. In SwiftUI, in 2020, it went from very hard to nearly impossible.
@@ -29,7 +31,15 @@ struct ContentView: View {
 }
 ```
 
-That’s the whole integration. Install it through Swift Package Manager — File → Add Package Dependency, paste `https://github.com/MojtabaHs/iPhoneNumberField.git`, take the default version rules — and the field works with the modifiers you already know: `.foregroundColor(_:)`, `.font(_:)`, `.multilineTextAlignment(_:)`, and so on.
+That’s the whole integration. Install it through Swift Package Manager in three steps:
+
+![Xcode’s File menu with Add Package Dependency highlighted](/format-phone-numbers/install-menu.png "File → Add Package Dependency")
+
+![Pasting the iPhoneNumberField repository URL into Xcode](/format-phone-numbers/install-url.png "Paste https://github.com/MojtabaHs/iPhoneNumberField.git")
+
+![Choosing the default version rules in Xcode](/format-phone-numbers/install-version.png "Take the default version rules")
+
+Once it’s added, the field works with the modifiers you already know: `.foregroundColor(_:)`, `.font(_:)`, `.multilineTextAlignment(_:)`, and so on.
 
 The rest of the API exists for the parts that are specific to phone numbers.
 
