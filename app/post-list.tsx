@@ -13,6 +13,7 @@ function isNew(date: string): boolean {
 
 export function PostList({ posts }: { posts: Post[] }) {
   const years = [...new Set(posts.map((post) => post.date.slice(0, 4)))];
+  const newestId = [...posts].sort((a, b) => b.date.localeCompare(a.date))[0]?.id;
 
   return (
     <section className={styles.postList}>
@@ -36,7 +37,9 @@ export function PostList({ posts }: { posts: Post[] }) {
                       <Link href={`/${post.id}`}>
                         <h2>
                           {post.title}
-                          {isNew(post.date) && <NewBadge />}
+                          {post.id === newestId && isNew(post.date) && (
+                            <NewBadge />
+                          )}
                         </h2>
                         <time dateTime={post.date}>
                           <span>{`${month} ${Number(d)}`}</span>

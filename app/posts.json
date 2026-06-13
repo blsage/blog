@@ -1,19 +1,24 @@
 {
   "posts": [
     {
+      "id": "glass-tab-bar",
+      "date": "2025-11-28",
+      "title": "A custom Liquid Glass tab bar"
+    },
+    {
       "id": "building-this-blog",
       "date": "2026-06-06",
       "title": "Building this blog"
     },
     {
-      "id": "how-to-show-confetti-in-swiftui",
+      "id": "confetti",
       "date": "2024-12-16",
-      "title": "How to show confetti in SwiftUI"
+      "title": "Sexy confetti"
     },
     {
-      "id": "format-phone-numbers-entirely-in-swiftui",
+      "id": "phone-numbers",
       "date": "2020-11-06",
-      "title": "Format phone numbers entirely in SwiftUI"
+      "title": "Formatting phone numbers"
     }
   ]
 }

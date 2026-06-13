@@ -17,14 +17,14 @@ export function MarginNote({
     const target = targetRef.current;
     if (!target) return;
 
-    if (window.matchMedia("(max-width: 1080px)").matches) return;
+    const narrow = window.matchMedia("(max-width: 1080px)").matches;
 
     const annotation = annotate(target, {
       type: "bracket",
-      brackets: ["right"],
+      brackets: narrow ? ["bottom"] : ["right"],
       color: "#1a1a1a",
       strokeWidth: 2,
-      padding: [4, 7, 4, 0],
+      padding: narrow ? [4, 2, 10, 2] : [4, 7, 4, 0],
       iterations: 1,
       animationDuration: 700,
     });

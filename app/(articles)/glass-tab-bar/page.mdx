@@ -1,0 +1,64 @@
+import { Highlight } from "@/app/components/highlight";
+
+export const metadata = {
+  title: "A custom Liquid Glass tab bar",
+  description:
+    "iOS 26’s Liquid Glass tab bar is beautiful and closed. Here’s how UnionTabView puts any SwiftUI view inside it.",
+};
+
+iOS 26 gave the tab bar a new look. It floats now, a frosted capsule that lifts off the content and refracts whatever scrolls behind it, with a selection pill that slides between items and a little haptic tap when it lands. Apple calls the material Liquid Glass, and it’s the nicest the tab bar has looked in years.
+
+It’s also closed. You hand `TabView` a set of `Label`s, each one an SF Symbol and a string, and that’s the whole vocabulary. The moment you want something that isn’t a symbol — a profile photo in the last slot, a live badge that pulses, an avatar that loads from a URL — the glass quietly refuses. You get the beautiful bar or you get your custom view, not both.
+
+You can build the bar yourself, and most people do — an `HStack` of buttons riding under the system one. But the hand-rolled versions always give themselves away on one of three details: the way scrolling content fades out under the bar instead of hard-clipping against it, the glass pill that slides behind the selected tab, and the live, refracting interactivity of the glass itself. Miss any one and it stops feeling like the system.
+
+[UnionTabView](https://github.com/unionst/union-tab-view) keeps all three, and still lets you drop <Highlight>any view you want into a slot.</Highlight>
+
+![UnionTabView: a profile photo and custom badges living inside the Liquid Glass tab bar](/glasswork/demo.gif#frameless "Custom SwiftUI views, inside the real glass.")
+
+## How to use
+
+It’s a `TabView` that takes views instead of symbols. You pass your tabs, then a closure that builds each slot however you like:
+
+```swift title="A profile photo in the tab bar"
+import UnionTabView
+
+UnionTabView(selection: $tab, tabs: Tab.allCases) {
+    HomeView().unionTab(Tab.home)
+    SearchView().unionTab(Tab.search)
+    ProfileView().unionTab(Tab.profile)
+} item: { tab, isSelected in
+    if tab == .profile {
+        AsyncImage(url: user.avatarURL) { image in
+            image.resizable().scaledToFill()
+        } placeholder: {
+            Circle().fill(.gray.opacity(0.2))
+        }
+        .frame(width: 28, height: 28)
+        .clipShape(.circle)
+        .overlay(Circle().stroke(.blue, lineWidth: isSelected ? 2 : 0))
+    } else {
+        Image(systemName: tab.symbol)
+            .foregroundStyle(isSelected ? .primary : .secondary)
+    }
+}
+```
+
+A profile picture, ringed when it’s the active tab, sliding glass and all — in a tab bar that the platform says only holds symbols.
+
+## On older phones
+
+The whole thing is gated on `iOS 26`. Below that there’s no Liquid Glass to imitate, so the package falls back to a clean custom capsule bar with the same sliding behavior — and crucially, the *same call-site code*. You write `UnionTabView` once and it renders glass where there’s glass and a tidy fallback where there isn’t. Nothing at your end branches on the OS version.
+
+<a className="cta" href="https://github.com/unionst/union-tab-view" target="_blank" rel="noopener noreferrer">
+  <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.6 7.6 0 012-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/>
+  </svg>
+  UnionTabView is on GitHub. <span>Get the package.</span>
+</a>
+
+<footer>
+# Note
+
+UnionTabView is open source under the MIT license. It needs iOS 17 or later, builds with Swift 6, and installs through the Swift Package Manager. This post was written with [Claude](https://claude.com/claude-code).
+</footer>

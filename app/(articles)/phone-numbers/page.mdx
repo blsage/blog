@@ -3,7 +3,7 @@ import { MarginNote } from "@/app/components/margin-note";
 import { PhoneField } from "./phone-field";
 
 export const metadata = {
-  title: "Format phone numbers entirely in SwiftUI",
+  title: "Formatting phone numbers",
   description:
     "Real-time phone number formatting is harder than it looks. iPhoneNumberField makes it one line of SwiftUI.",
 };
@@ -20,7 +20,7 @@ So we built [iPhoneNumberField](https://github.com/MojtabaHs/iPhoneNumberField):
 
 <PhoneField />
 
-That’s the idea, in your browser. On iOS it does the same thing — on every keystroke, cursor always landing in the right place:
+That’s it running in your browser. On a phone it’s identical — every keystroke reformatted, the cursor always landing where it should:
 
 ![iPhoneNumberField formatting a number as it’s typed](/format-phone-numbers/typing.gif "Formatting on every keystroke, cursor always in the right place.")
 
@@ -39,17 +39,7 @@ struct ContentView: View {
 }
 ```
 
-That’s the whole integration. Install it through Swift Package Manager in three steps:
-
-![Xcode’s File menu with Add Package Dependency highlighted](/format-phone-numbers/install-menu.png "File → Add Package Dependency")
-
-![Pasting the iPhoneNumberField repository URL into Xcode](/format-phone-numbers/install-url.png "Paste https://github.com/MojtabaHs/iPhoneNumberField.git")
-
-![Choosing the default version rules in Xcode](/format-phone-numbers/install-version.png "Take the default version rules")
-
-Once it’s added, the field works with the modifiers you already know: `.foregroundColor(_:)`, `.font(_:)`, `.multilineTextAlignment(_:)`, and so on.
-
-The rest of the API exists for the parts that are specific to phone numbers.
+That’s the whole integration. It’s a Swift package, so you add it the way you add any other — point Xcode at the repo URL — and the field is yours. It takes the SwiftUI modifiers you already reach for, `.font(_:)`, `.multilineTextAlignment(_:)`, and the rest, then adds a handful of its own for the parts that are particular to phone numbers.
 
 ![Flags, focus, and custom styles side by side](/format-phone-numbers/features.gif "Flags, programmatic focus, and custom styles.")
 
@@ -93,9 +83,7 @@ iPhoneNumberField(text: $text)
     .shadow(color: .gray, radius: 10)
 ```
 
-The full list of modifiers is in the [README](https://github.com/MojtabaHs/iPhoneNumberField). There’s also a [video walkthrough](https://www.youtube.com/watch?v=4SnmiWFvolM).
-
-Phone numbers are part of almost every app. There’s no reason this should be hard, and now it isn’t.
+The [README](https://github.com/MojtabaHs/iPhoneNumberField) has the full list, and there’s a [video walkthrough](https://www.youtube.com/watch?v=4SnmiWFvolM) if you’d rather watch. Nearly impossible in 2020. One line now.
 
 <a className="cta" href="https://github.com/MojtabaHs/iPhoneNumberField" target="_blank" rel="noopener noreferrer">
   <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
@@ -107,5 +95,5 @@ Phone numbers are part of almost every app. There’s no reason this should be h
 <footer>
 # Note
 
-Originally published on [ITNEXT](https://itnext.io/format-phone-numbers-entirely-in-swiftui-9456f52990a1) in November 2020, lightly rewritten for this site.
+Originally published on [ITNEXT](https://itnext.io/format-phone-numbers-entirely-in-swiftui-9456f52990a1) in November 2020, and rewritten for this site with [Claude](https://claude.com/claude-code).
 </footer>

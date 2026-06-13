@@ -551,9 +551,8 @@ figure[data-rehype-pretty-code-figure]
 
 figure[data-rehype-pretty-code-figure] pre {
   display: block;
-  overflow-x: hidden;
-  white-space: pre-wrap;
-  word-break: break-word;
+  overflow-x: auto;
+  white-space: pre;
   border-radius: 0.5rem;
   background: var(--color-code-bg);
   color: #333;

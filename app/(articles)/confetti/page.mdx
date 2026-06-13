@@ -1,12 +1,14 @@
+import { Highlight } from "@/app/components/highlight";
+
 export const metadata = {
-  title: "How to show confetti in SwiftUI",
+  title: "Sexy confetti",
   description:
     "Apple’s iMessage confetti, packaged as a one-line SwiftUI view. Meet UnionConfetti.",
 };
 
 I always assumed Apple would hand over the confetti from iMessage as a SwiftUI component one day. They never did, and I’m not sure why.
 
-Every other confetti library I tried looked wrong: too sparse, too neon, too obviously physics-engine. I wanted exactly one thing: a view that rains down the same confetti iMessage does, with no modifiers and nothing to configure.
+Every other confetti library I tried looked wrong: too sparse, too neon, too obviously a physics engine. I wanted one thing — a view that rains down <Highlight>the exact confetti iMessage uses</Highlight>, with nothing to configure.
 
 So I went looking, found an old write-up with the right idea, and discovered the code no longer compiled. I read back through the current documentation to bring it up to date, then wrapped the whole thing in a single SwiftUI view: [UnionConfetti](https://github.com/unionst/union-confetti). On a real device it looks like this:
 
@@ -37,9 +39,7 @@ That’s the whole API. Flip `showConfetti` to `true` and it rains; it resets it
 
 ![Confetti firing on a successful Apple Pay payment](/confetti/in-app.gif#phone "Confetti on a completed payment.")
 
-## That’s it
-
-There’s room to grow (blurring the back layer, exposing a few customizations), but for a confetti view that just behaves like iMessage and gets out of the way, it does the job.
+There’s more it could do — blur the layer behind it, expose a few knobs — but the whole point was a view that needs none of that. It rains the confetti, then gets out of the way.
 
 <a className="cta" href="https://github.com/unionst/union-confetti" target="_blank" rel="noopener noreferrer">
   <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
@@ -51,5 +51,5 @@ There’s room to grow (blurring the back layer, exposing a few customizations),
 <footer>
 # Note
 
-Originally published on [ITNEXT](https://itnext.io/how-to-show-confetti-in-swiftui-a5a26698dc5b) in December 2024, lightly rewritten for this site.
+Originally published on [ITNEXT](https://itnext.io/how-to-show-confetti-in-swiftui-a5a26698dc5b) in December 2024, and rewritten for this site with [Claude](https://claude.com/claude-code).
 </footer>
