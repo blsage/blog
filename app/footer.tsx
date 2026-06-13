@@ -19,6 +19,15 @@ const BAR_MIN = 2;
 const BAR_MAX = 11;
 const NOISE_FLOOR = 1e-8;
 
+const PLAYLIST_BASE = (process.env.NEXT_PUBLIC_PLAYLIST_BASE ?? "").replace(
+  /\/+$/,
+  ""
+);
+
+function trackUrl(file: string): string {
+  return `${PLAYLIST_BASE}/playlist/${file}`;
+}
+
 function clockIn(timeZone: string): Clock {
   const parts = new Intl.DateTimeFormat("en-US", {
     hour: "numeric",
@@ -188,7 +197,7 @@ export function Footer() {
 
   const play = async (i: number) => {
     try {
-      const url = `/playlist/${PLAYLIST[i].file}`;
+      const url = trackUrl(PLAYLIST[i].file);
       if (!audioRef.current) {
         audioRef.current = new Audio();
       }
@@ -228,7 +237,7 @@ export function Footer() {
       return;
     }
     const audio = audioRef.current;
-    const url = `/playlist/${PLAYLIST[trackIndex].file}`;
+    const url = trackUrl(PLAYLIST[trackIndex].file);
     if (audio && audio.src.endsWith(url) && !audio.ended) {
       ensureAnalyser();
       audioContextRef.current?.resume();
