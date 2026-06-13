@@ -21,8 +21,10 @@ export function ArticleAside() {
 
   useEffect(() => {
     const nodes = Array.from(
-      document.querySelectorAll<HTMLHeadingElement>("article h2[id]")
-    );
+      document.querySelectorAll<HTMLHeadingElement>(
+        "article h2[id], article footer h1[id]"
+      )
+    ).filter((node) => !node.closest("[data-footnotes]"));
     setHeadings(
       nodes.map((node) => ({ id: node.id, text: node.textContent ?? "" }))
     );

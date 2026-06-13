@@ -76,9 +76,21 @@ Videos drop into a framed card that loops silently, with a 1x/0.5x speed toggle 
 
 [^2]: Like this one. Click it to jump back.
 
+## The fun parts
+
+A few of the flourishes are worth opening up, since they’re what make a page feel handmade instead of generated.
+
+The margin notes are set in my actual handwriting. I turned my own letters into a font, named with no imagination “Bens Font 3,” which tells you how many tries it took, and loaded it with `next/font`. So when a note leans out into the margin, that’s my hand, not a typeface doing an impression of one.
+
+The bracket that pulls each note to the side is drawn with [rough.js](https://roughjs.com), by way of [rough-notation](https://github.com/rough-stuff/rough-notation). Instead of a clean SVG stroke it sketches a slightly wobbly line, redrawn a little differently each time, then animates it in when the note scrolls into view. The hand-drawn underlines and circles elsewhere on the site work the same way.
+
+The <Highlight>highlighter</Highlight> isn’t a flat swatch of color. It’s a gradient that runs strong through the middle and thins toward the edges, with the padding, tilt, and opacity all nudged by a seed taken from the text itself. Every stroke pools where a real marker would, and yet it stays deterministic: the same words always get the same swipe, so nothing flickers between renders.
+
+And the <Gradient>letter-by-letter gradient</Gradient> is exactly that. The text is split into characters, and each one is painted its own color, interpolated from the first letter to the last.
+
 ## Make it yours
 
-This whole site is a reusable template, [taylor-made](https://github.com/blsage/blog). Everything personal lives in just three files:
+This whole site is a reusable template, [taylor-made](https://github.com/blsage/taylor-made). Everything personal lives in just three files:
 
 <dl>
   <dt>site.config.ts</dt>
@@ -92,12 +104,12 @@ This whole site is a reusable template, [taylor-made](https://github.com/blsage/
 And you don’t have to touch them by hand. Clone the repo, open it in Claude Code, and paste this:
 
 <aside className="prompt" data-label="Try it">
-Clone https://github.com/blsage/blog and make it mine: put my name and city in site.config.ts, rewrite app/bio.mdx about me, empty app/posts.json, and start my first post at app/(articles)/hello/page.mdx.
+Clone https://github.com/blsage/taylor-made and make it mine: put my name and city in site.config.ts, rewrite app/bio.mdx about me, empty app/posts.json, and start my first post at app/(articles)/hello/page.mdx.
 </aside>
 
 That isn’t hypothetical: paste it in, and a minute later you’re holding your own copy of this site, named after you and ready to write in.
 
-<a className="cta" href="https://github.com/blsage/blog" target="_blank" rel="noopener noreferrer">
+<a className="cta" href="https://github.com/blsage/taylor-made" target="_blank" rel="noopener noreferrer">
   taylor-made is on GitHub. <span>Use the template.</span>
 </a>
 
